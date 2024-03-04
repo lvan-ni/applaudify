@@ -22,3 +22,5 @@ const addNewUser = async (newUser) => {
     console.log('------> Prisma AddNewUser Error: ', error);
   }
 };
+
+export { getAllUsers, addNewUser };

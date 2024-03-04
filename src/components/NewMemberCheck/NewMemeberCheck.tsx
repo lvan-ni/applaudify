@@ -1,30 +1,31 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { getAllMembers, addNewMember } from '@/libs/DB';
-import { MemberT } from '@/types/UserT';
+// import { getAllUsers, addNewUser } from '@/libs/DB';
+import { getAllUsers, addNewUser } from '@/libs/users/user-actions';
+// import { UserT } from '@/types/UserT';
 
-interface NewMemberCheckProps {
-  setMembers: (members: MemberT[]) => void;
+interface NewUserCheckProps {
+  setUsers: (users: any) => void;
 }
 
-const NewMemberCheck = () => {
+const NewUserCheck = () => {
   const { data: session } = useSession();
-  const [members, setMembers] = useState<MemberT[]>([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     if (!session) return;
-    let isSubscribed = true;
+    let hasUser = true;
 
     (async () => {
-      const members = await getAllMembers();
-      if (isSubscribed) {
-        setMembers(members);
-        const isMemberNew = !members.some(
-          (member: MemberT) => member.email === session.user?.email
+      const users = await getAllUsers();
+      if (hasUser) {
+        users && setUsers(users);
+        const isUserNew = !users.some(
+          (member: UserT) => member.email === session.user?.email
         );
-        if (isMemberNew) {
-          await addNewMember({
+        if (isUserNew) {
+          await addNewUser({
             email: session.user?.email as string,
             name: session.user?.name as string,
             avatarUrl: session.user?.image as string,
@@ -34,11 +35,11 @@ const NewMemberCheck = () => {
     })();
 
     return () => {
-      isSubscribed = false;
+      hasUser = false;
     };
-  }, [session, setMembers]);
+  }, [session, setUsers]);
 
   return null;
 };
 
-export default NewMemberCheck;
+export default NewUserCheck;
