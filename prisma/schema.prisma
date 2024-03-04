@@ -3,7 +3,33 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model applaud {
+  applaudId      String   @id @db.Uuid
+  receiverId     String   @db.Uuid
+  receiver       user     @relation("receiver", fields: [receiverId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "fk4xryanjhxq89hiadx8yjd22f2")
+  senderId       String   @db.Uuid
+  sender         user     @relation("sender", fields: [senderId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "fkidp0ie7d7g0unyckfwtbmcpb3")
+  applaudContent String   @db.VarChar(255)
+  isRead         Boolean  @default(false)
+  isPublished    Boolean  @default(false)
+  createdAt      DateTime @db.Timestamp(6)
+}
+
+model user {
+  userId     String    @id @db.Uuid
+  email      String    @db.VarChar(255)
+  name       String    @db.VarChar(255)
+  avatarURL  String?   @db.VarChar(255)
+  company    String?   @db.VarChar(255)
+  jobTitle   String?   @db.VarChar(255)
+  bio        String?   @db.VarChar(1000)
+  experience String?   @db.VarChar(1000)
+  skills     String?   @db.VarChar(1000)
+  createdAt  DateTime? @db.Timestamp(6)
+  asReceiver applaud[] @relation("receiver")
+  asSender   applaud[] @relation("sender")
 }
