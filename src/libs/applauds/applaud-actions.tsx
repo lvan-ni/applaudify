@@ -8,6 +8,10 @@ const getAllApplauds = async () => {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        sender: true,
+        receiver: true,
+      },
     });
     return allApplauds;
   } catch (error) {

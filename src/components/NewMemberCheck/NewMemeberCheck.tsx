@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { getAllMembers, addNewMember } from '@/libs/DB';
-import { MemberT } from '@/types/MemberT';
+import { MemberT } from '@/types/UserT';
 
 interface NewMemberCheckProps {
   setMembers: (members: MemberT[]) => void;

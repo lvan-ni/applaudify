@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import BackButton from '@/components/BackButton/BackButton';
 import { getAllMembers, updateMember } from '@/libs/DB';
-import { MemberT } from '@/types/MemberT';
+import { MemberT } from '@/types/UserT';
 import { UpdatedMemberT } from '@/types/UpdatedMemberT';
 
 const EditProfile = () => {
@@ -130,100 +130,100 @@ const EditProfile = () => {
         </button>
       </header>
 
-        <section className='flex flex-col gap-8 items-center w-full pb-24'>
-          <div className='flex w-full flex-col gap-8'>
-            <div className='flex items-center justify-center w-full gap-8 px-2 py-3'>
-              {session && (
-                <Image
-                  src={imageURL}
-                  alt='Profile photo'
-                  width={88}
-                  height={88}
-                  className='rounded-full border border-silver'
-                ></Image>
-              )}
-              <div className='flex flex-col gap-2'>
-                <input
-                  type='text'
-                  value={memberName}
-                  onChange={(e) => setMemberName(e.target.value)}
-                  className='body-large bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
-                  placeholder='Name'
-                />
-                {nameErrorMessage}
-                <input
-                  type='text'
-                  value={memberJobTitle}
-                  onChange={(e) => setMemberJobTitle(e.target.value)}
-                  className='body-small bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
-                  placeholder='Job Title'
-                />
-                <input
-                  type='text'
-                  value={memberCompany}
-                  onChange={(e) => setMemberCompany(e.target.value)}
-                  className='body-small bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
-                  placeholder='Company'
-                />
-              </div>
-            </div>
-            <form
-              id='editProfile'
-              className='flex flex-col gap-10'
-              ref={formRef}
-            >
-              <textarea
-                rows={6}
-                placeholder='Bio'
-                ref={bioRef}
-                value={memberBio}
-                onChange={handleBioChange}
-                className='border border-silver rounded-xl p-3'
-                maxLength={1000}
+      <section className='flex flex-col gap-8 items-center w-full pb-24'>
+        <div className='flex w-full flex-col gap-8'>
+          <div className='flex items-center justify-center w-full gap-8 px-2 py-3'>
+            {session && (
+              <Image
+                src={imageURL}
+                alt='Profile photo'
+                width={88}
+                height={88}
+                className='rounded-full border border-silver'
+              ></Image>
+            )}
+            <div className='flex flex-col gap-2'>
+              <input
+                type='text'
+                value={memberName}
+                onChange={(e) => setMemberName(e.target.value)}
+                className='body-large bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
+                placeholder='Name'
               />
-            </form>
-            <div className='flex flex-col justify-center items-center gap-4'>
-              <div className='flex gap-2 justify-center flex-wrap'>
-                {memberSkills.map((skill, index) => (
-                  <div
-                    key={index}
-                    className='skill-btn'
-                  >
-                    <button onClick={() => handleRemoveSkill(index)}>
-                      {skill} x
-                    </button>
-                  </div>
-                ))}
-              </div>
-              {skillsErrorMessage}
-              <div className='flex gap-2 justify-center'>
-                <input
-                  type='text'
-                  placeholder='New Skill..'
-                  ref={newSkillRef}
-                  value={newSkill}
-                  onChange={handleSkillChange}
-                  className='w-1/2 border border-silver rounded-xl px-3'
-                />
-                <button
-                  className='btn w-1/3'
-                  onClick={handleAddSkill}
-                >
-                  Add
-                </button>
-              </div>
+              {nameErrorMessage}
+              <input
+                type='text'
+                value={memberJobTitle}
+                onChange={(e) => setMemberJobTitle(e.target.value)}
+                className='body-small bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
+                placeholder='Job Title'
+              />
+              <input
+                type='text'
+                value={memberCompany}
+                onChange={(e) => setMemberCompany(e.target.value)}
+                className='body-small bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
+                placeholder='Company'
+              />
             </div>
+          </div>
+          <form
+            id='editProfile'
+            className='flex flex-col gap-10'
+            ref={formRef}
+          >
             <textarea
-              rows={10}
-              placeholder='Experience'
-              ref={experienceRef}
-              value={memberExperience}
-              onChange={handleExperienceChange}
+              rows={6}
+              placeholder='Bio'
+              ref={bioRef}
+              value={memberBio}
+              onChange={handleBioChange}
               className='border border-silver rounded-xl p-3'
               maxLength={1000}
             />
+          </form>
+          <div className='flex flex-col justify-center items-center gap-4'>
+            <div className='flex gap-2 justify-center flex-wrap'>
+              {memberSkills.map((skill, index) => (
+                <div
+                  key={index}
+                  className='skill-btn'
+                >
+                  <button onClick={() => handleRemoveSkill(index)}>
+                    {skill} x
+                  </button>
+                </div>
+              ))}
+            </div>
+            {skillsErrorMessage}
+            <div className='flex gap-2 justify-center'>
+              <input
+                type='text'
+                placeholder='New Skill..'
+                ref={newSkillRef}
+                value={newSkill}
+                onChange={handleSkillChange}
+                className='w-1/2 border border-silver rounded-xl px-3'
+              />
+              <button
+                className='btn w-1/3'
+                onClick={handleAddSkill}
+              >
+                Add
+              </button>
+            </div>
           </div>
-        </section>
+          <textarea
+            rows={10}
+            placeholder='Experience'
+            ref={experienceRef}
+            value={memberExperience}
+            onChange={handleExperienceChange}
+            className='border border-silver rounded-xl p-3'
+            maxLength={1000}
+          />
+        </div>
+      </section>
     </div>
   );
 };

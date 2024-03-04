@@ -7,7 +7,7 @@ import React, {
   useRef,
 } from 'react';
 import { getAllMembers } from '@/libs/DB';
-import { MemberT } from '@/types/MemberT';
+import { MemberT } from '@/types/UserT';
 import { ApplaudT } from '@/types/ApplaudT';
 import CardForHome from '../CardForHome/CardForHome';
 

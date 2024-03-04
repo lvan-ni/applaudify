@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import getAllApplauds from '../applauds/applaud-actions';
+import getAllApplauds from '../../libs/applauds/applaud-actions';
 
 const CardForHome = async () => {
   const allApplauds = await getAllApplauds();
@@ -11,7 +11,7 @@ const CardForHome = async () => {
         [...allApplauds]
           .filter((applaud) => applaud.isPublished === true)
           .map((applaud) => {
-            const { senderId, receiverId, applaudContent, createdAt } = applaud;
+            const { sender, receiver, applaudContent, createdAt } = applaud;
             const date = new Date(createdAt);
             const dateString = date.toLocaleDateString('en-US', {
               year: 'numeric',
@@ -23,10 +23,10 @@ const CardForHome = async () => {
                 key={allApplauds.indexOf(applaud)}
                 className='applaud-card'
               >
-                <Link href={`/user/${receiverId}`}>
+                <Link href={`/user/${receiver.userId}`}>
                   <article className='receiver-layout'>
                     <Image
-                      src={receiverId.avatarUrl}
+                      src={receiver.avatarURL && receiver.avatarURL}
                       alt='Receiver Profile'
                       width={60}
                       height={60}
@@ -47,14 +47,14 @@ const CardForHome = async () => {
                 </Link>
                 <p className='send-date'>{dateString}</p>
                 <p className='p-2.5 body-main text-center'>
-                  &apos;{comment}&apos;
+                  &apos;{applaudContent}&apos;
                 </p>
                 <article className='flex flex-col items-center'>
                   <p className='sender-info text-stone'>From</p>
-                  <Link href={`/user/${sender.id}`}>
+                  <Link href={`/user/${sender.userId}`}>
                     <div className='sender-layout'>
                       <Image
-                        src={sender.avatarUrl}
+                        src={sender.avatarURL}
                         alt='Sender Profile'
                         width={30}
                         height={30}
