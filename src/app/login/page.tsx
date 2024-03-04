@@ -2,6 +2,7 @@
 import React from 'react';
 import { signIn } from 'next-auth/react';
 import Image from 'next/image';
+import google from '@/assets/login/google.png';
 import github from '@/assets/login/github.png';
 import linkedin from '@/assets/login/linkedin.png';
 import BackButton from '@/components/BackButton/BackButton';
@@ -20,6 +21,18 @@ const Login = () => {
           </h3>
         </div>
         <div className='flex flex-col items-center gap-6 w-4/5 '>
+        <button
+            className='button login-btn'
+            onClick={() => signIn('google', { callbackUrl: '/home' })}
+          >
+            <Image
+              src={google}
+              alt='google'
+              width={20}
+              height={20}
+            ></Image>
+            Continue with Google
+          </button>
           <button
             className='button login-btn'
             onClick={() => signIn('github', { callbackUrl: '/home' })}
