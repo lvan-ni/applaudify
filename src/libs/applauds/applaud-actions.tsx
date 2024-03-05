@@ -15,7 +15,8 @@ const getAllApplauds = async () => {
     });
     return allApplauds;
   } catch (error) {
-    console.log('------> Prisma GetAllApplauds Error: ', error);
+    console.error('------> Prisma GetAllApplauds Error: ', error);
+    throw error;
   }
 };
 

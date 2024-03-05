@@ -1,7 +1,7 @@
 'use server';
 
-import { UserT } from '@/types/UserT';
 import prisma from '../../../prisma/client';
+import { NewUserT } from '@/types/NewUserT';
 
 const getAllUsers = async () => {
   try {
@@ -13,20 +13,27 @@ const getAllUsers = async () => {
   }
 };
 
-const addNewUser = async (newUser: {
-  email: string;
-  name: string;
-  avatarURL: string;
-}) => {
-  try {
-    const user = await prisma.user.create({
-      data: newUser,
+const checkAndAddUser = async (thisUserData: NewUserT) => {
+  const { email, name, avatarURL } = thisUserData;
+  const userExists = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (!userExists) {
+    const newUser = await prisma.user.create({
+      data: {
+        email: email,
+        name: name,
+        avatarURL: avatarURL,
+      },
     });
-    return user;
-  } catch (error) {
-    console.error('------> Prisma AddNewUser Error: ', error);
-    throw error;
+    return newUser;
+  } else {
+    console.log(`------> User with email ${email} already exists.`);
+    return userExists;
   }
 };
 
-export { getAllUsers, addNewUser };
+export { getAllUsers, checkAndAddUser };
