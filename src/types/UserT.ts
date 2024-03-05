@@ -1,10 +1,10 @@
 export type UserT = {
-  id: string;
+  userId: string;
   email: string;
   name: string;
   jobTitle?: string;
   company?: string;
-  avatarUrl: string;
+  avatarURL: string;
   bio?: string;
   skills?: string;
   experience?: string;

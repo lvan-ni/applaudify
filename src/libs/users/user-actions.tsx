@@ -8,18 +8,24 @@ const getAllUsers = async () => {
     const allUsers = await prisma.user.findMany();
     return allUsers;
   } catch (error) {
-    console.log('------> Prisma GetAllUsers Error: ', error);
+    console.error('------> Prisma GetAllUsers Error: ', error);
+    throw error;
   }
 };
 
-const addNewUser = async (newUser) => {
+const addNewUser = async (newUser: {
+  email: string;
+  name: string;
+  avatarURL: string;
+}) => {
   try {
     const user = await prisma.user.create({
       data: newUser,
     });
     return user;
   } catch (error) {
-    console.log('------> Prisma AddNewUser Error: ', error);
+    console.error('------> Prisma AddNewUser Error: ', error);
+    throw error;
   }
 };
 

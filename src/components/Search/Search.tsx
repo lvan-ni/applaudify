@@ -9,7 +9,7 @@ import React, {
 import { getAllMembers } from '@/libs/DB';
 import { MemberT } from '@/types/UserT';
 import { ApplaudT } from '@/types/ApplaudT';
-import CardForHome from '../CardForHome/CardForHome';
+import CardForHome from '../plaud-card/home';
 
 const SearchComponent = () => {
   const [applauds, setApplauds] = useState<ApplaudT[]>([]);
