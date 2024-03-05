@@ -1,6 +1,6 @@
 'use client';
-import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 import { checkAndAddUser } from '@/libs/users/user-actions';
 import { NewUserT } from '@/types/NewUserT';
 

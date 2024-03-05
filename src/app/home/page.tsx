@@ -1,6 +1,6 @@
 import Header from '@/components/Header/Header';
 import UserCheck from '@/components/login-user-check/user-check';
-import CardForHome from '@/components/plaud-card/home';
+import PlaudCardHome from '@/components/plaud-card/home';
 
 const Home = async () => {
   return (
@@ -9,7 +9,7 @@ const Home = async () => {
       <UserCheck />
       <main className='flex flex-col gap-8 mt-1 mx-10'>
         <h1 className='small-header'>👏 Spotlights</h1>
-        <CardForHome />
+        <PlaudCardHome />
       </main>
     </div>
   );
