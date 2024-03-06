@@ -1,47 +1,25 @@
-// 'use client';
-// import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { getAllMembers, getPublishedApplauds } from '@/libs/DB';
 import Header from '@/components/header/header';
 import ProfileInfo from '@/components/profile-info/profile-info';
 import CardForProfile from '@/components/applaud-card/profile';
 import MockAppluadCards from '@/components/applaud-card/mock';
-// import { ApplaudT } from '@/types/ApplaudT';
-import { MemberT } from '@/types/UserT';
+import Image from 'next/image';
+import { getAllUsers } from '@/libs/users/user-actions';
+import { getPublishedApplauds } from '@/libs/applauds/applaud-actions';
+import { ApplaudT } from '@/types/ApplaudT';
 
-const MemberProfile = async ({ params }: { params: { memberId: string } }) => {
-  // const [member, setMember] = useState<MemberT>();
-  // console.log(member);
-  // const [individualApplauds, setIndividualApplauds] = useState<ApplaudT[]>([]);
 
-  const { memberId } = params;
-  const members: MemberT[] = await getAllMembers();
-  const member = members.find((member) => member.id === memberId);
-  const individualApplauds = await getPublishedApplauds(
-    member?.email as string
-  );
+const userProfile = async ({ params }: { params: { userId: string } }) => {
+  const { userId } = params;
+  const allUsers = await getAllUsers();
+  const user = allUsers.find((user) => user.userId === userId);
 
-  const firstName = member?.name.split(' ')[0] as string;
-  const fullName = member?.name as string;
-  const bio = member?.bio as string;
-  const skills = member?.skills?.split(',') as string[];
-  const experience = member?.experience as string;
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const urlString = window.location.href;
-  //     const urlObject = new URL(urlString);
-  //     const pathname = urlObject.pathname;
-  //     const parts = pathname.split('/');
-  //     const memberId = parts[parts.length - 1];
-  //     const members: MemberT[] = await getAllMembers();
-  //     setMember(members.find((member) => member.id === memberId));
-  //     const individualApplauds = await getPublishedApplauds(
-  //       member?.email as string
-  //     );
-  //     setIndividualApplauds(individualApplauds);
-  //   })();
-  // }, [member]);
+  const email = user?.email as string;
+  const fullName = user?.name as string;
+  const firstName = user?.name.split(' ')[0] as string;
+  const bio = user?.bio as string;
+  const skills = user?.skills?.split(',') as string[];
+  const experience = user?.experience as string;
+  const individualApplauds = (await getPublishedApplauds(email)) as ApplaudT[];
 
   return (
     <div className='flex flex-col mt-4 gap-10'>
@@ -50,7 +28,7 @@ const MemberProfile = async ({ params }: { params: { memberId: string } }) => {
         <section className='flex flex-col gap-8 items-center w-full'>
           <div className='flex items-center justify-center w-full gap-8 px-2 py-3'>
             <Image
-              src={member?.avatarUrl!}
+              src={user?.avatarURL!}
               alt='Profile photo'
               width={88}
               height={88}
@@ -58,8 +36,8 @@ const MemberProfile = async ({ params }: { params: { memberId: string } }) => {
             ></Image>
             <div className='w-3/5'>
               <h4 className='body-large'>{fullName}</h4>
-              <p className='body-small'>{member?.jobTitle}</p>
-              <p className='body-small'>{member?.company}</p>
+              <p className='body-small'>{user?.jobTitle}</p>
+              <p className='body-small'>{user?.company}</p>
             </div>
           </div>
           <ProfileInfo
@@ -73,7 +51,7 @@ const MemberProfile = async ({ params }: { params: { memberId: string } }) => {
           <CardForProfile applauds={individualApplauds} />
           <MockAppluadCards
             firstName={firstName}
-            imageURL={member?.avatarUrl!}
+            imageURL={user?.avatarURL!}
           />
         </section>
       </main>
@@ -81,4 +59,4 @@ const MemberProfile = async ({ params }: { params: { memberId: string } }) => {
   );
 };
 
-export default MemberProfile;
+export default userProfile;
