@@ -5,8 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ilija from '@/assets/about/ilija.png';
 import lvan from '@/assets/about/lvan.png';
-import tim from '@/assets/about/tim.png';
-import sudha from '@/assets/about/sudha.png';
 
 const About = () => {
   return (
@@ -55,26 +53,6 @@ const About = () => {
               <p className='body-small'>Backend, DevOps</p>
             </article>
           </Link>
-          {/* <Link href='https://www.linkedin.com/in/tim-hansson-meng/'>
-            <article className='flex flex-col items-center'>
-              <Image
-                src={tim}
-                alt='tim Photo'
-                width={100}
-              ></Image>
-              <h4 className='text-center'>Tim Hansson Meng</h4>
-            </article>
-          </Link>
-          <Link href='https://www.linkedin.com/in/sudha-madhuri-poojari/'>
-            <article className='flex flex-col items-center'>
-              <Image
-                src={sudha}
-                alt='Suhda Photo'
-                width={100}
-              ></Image>
-              <h4 className='text-center'>Sudha Madhuri Poojari</h4>
-            </article>
-          </Link> */}
         </section>
       </main>
       <footer className='flex flex-col gap-10 mt-20 mx-10'>
