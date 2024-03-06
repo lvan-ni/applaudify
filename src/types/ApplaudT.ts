@@ -1,25 +1,25 @@
 export type ApplaudT = {
-  id: string;
-  sender: SenderT;
+  applaudId: string;
   receiver: ReceiverT;
-  comment: string;
-  read: boolean;
-  published: boolean;
-  createdAt: string;
+  sender: SenderT;
+  applaudContent: string;
+  isRead: boolean;
+  isPublished: boolean;
+  createdAt: Date;
 };
 
 export type SenderT = {
-  id: string;
+  userId: string;
   name: string;
   jobTitle: string;
   company?: string;
-  avatarUrl: string;
+  avatarURL: string;
 };
 
 export type ReceiverT = {
-  id: string;
+  userId: string;
   name: string;
   jobTitle: string;
   company?: string;
-  avatarUrl: string;
+  avatarURL: string;
 };
