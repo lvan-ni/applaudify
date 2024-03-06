@@ -1,5 +1,6 @@
 'use server';
 
+import { NewApplaudT } from '@/types/NewApplaudT';
 import prisma from '../../../prisma/client';
 
 const getAllApplauds = async () => {
@@ -109,6 +110,18 @@ const unpublishApplaud = async (applaudId: string) => {
   }
 };
 
+const sendNewApplaud = async (newApplaud: NewApplaudT) => {
+  try {
+    const send = await prisma.applaud.create({
+      data: newApplaud,
+    });
+    return send;
+  } catch (error) {
+    console.error(`------> Prisma sendNewApplaud Error: `, error);
+    throw error;
+  }
+};
+
 export {
   getAllApplauds,
   getUnreadApplauds,
@@ -116,4 +129,5 @@ export {
   publishApplaud,
   getPublishedApplauds,
   unpublishApplaud,
+  sendNewApplaud,
 };
