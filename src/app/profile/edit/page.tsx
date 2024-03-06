@@ -6,7 +6,7 @@ import BackButton from '@/components/button/back-button';
 import { getAllUsers } from '@/libs/users/user-actions';
 import { updateUserProfile } from '@/libs/users/user-actions';
 import { UserT } from '@/types/UserT';
-import { newProfileInfoT } from '@/types/newProfileInfoT';
+import { NewProfileInfoT } from '@/types/newProfileInfoT';
 
 const EditProfile = () => {
   const { data: session } = useSession();
@@ -103,7 +103,7 @@ const EditProfile = () => {
     const userExperience = experienceRef.current?.value;
     const userId = user?.userId as string;
 
-    const newProfileInfo: newProfileInfoT = {
+    const newProfileInfo: NewProfileInfoT = {
       name: userName,
       jobTitle: userJobTitle,
       company: userCompany,

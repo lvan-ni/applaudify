@@ -1,8 +1,8 @@
 'use server';
 
-import { profileToBeUpdatedT } from '@/types/newProfileInfoT';
 import prisma from '../../../prisma/client';
 import { NewUserT } from '@/types/NewUserT';
+import { NewProfileInfoT } from '@/types/newProfileInfoT';
 
 const getAllUsers = async () => {
   try {
@@ -43,7 +43,7 @@ const checkAndAddUser = async (thisUserData: NewUserT) => {
 };
 
 const updateUserProfile = async (
-  newProfileInfo: profileToBeUpdatedT,
+  newProfileInfo: NewProfileInfoT,
   userId: string
 ) => {
   try {
