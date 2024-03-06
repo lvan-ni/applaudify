@@ -1,11 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import getAllApplauds from '@/libs/applauds/applaud-actions';
+import { getAllApplauds } from '@/libs/applauds/applaud-actions';
 
 const PlaudCardHome = async () => {
   const allApplauds = await getAllApplauds();
-  
+
   return (
     <div>
       {allApplauds &&
