@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { initialTabs as tabs } from '@/types/Tabs';
 import Header from '@/components/header/header';
-import Inbox from '@/components/inbox/inbox';
+import Inbox from '@/components/check/inbox-unread-count';
 import CardForProfile from '@/components/applaud-card/profile';
 import MockAppluadCards from '@/components/applaud-card/mock';
 import { getAllUsers } from '@/libs/users/user-actions';

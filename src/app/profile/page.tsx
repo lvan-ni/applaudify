@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import Header from '@/components/header/header';
-import Inbox from '@/components/inbox/inbox';
+import InboxUnreadCount from '@/components/check/inbox-unread-count';
 import ProfileInfo from '@/components/profile-info/profile-info';
 import CardForProfile from '@/components/applaud-card/profile';
 import MockAppluadCards from '@/components/applaud-card/mock';
@@ -51,7 +51,7 @@ const Profile = () => {
                 Edit
               </Link>
               <div className='flex justify-end'>
-                {session && <Inbox session={session} />}
+                {session && <InboxUnreadCount session={session} />}
               </div>
             </div>
             <div className='flex items-center justify-center w-full gap-8 px-2 py-3'>

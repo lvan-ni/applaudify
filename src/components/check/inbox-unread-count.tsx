@@ -1,23 +1,26 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getUnreadApplauds } from '@/libs/DB';
+import { getUnreadApplauds } from '@/libs/applauds/applaud-actions';
 import { SessionT } from '@/types/SessionT';
+import { ApplaudT } from '@/types/ApplaudT';
 
 type InboxProps = {
   session: SessionT;
 };
 
-const Inbox: React.FC<InboxProps> = ({ session }) => {
+const InboxUnreadCount = ({ session }: InboxProps) => {
   const [Numbers, setNumbers] = useState<string>('');
 
   useEffect(() => {
     (async () => {
-      const memberEmail = session?.user?.email;
-      if (memberEmail) {
-        const unreadNumbers = await getUnreadApplauds(memberEmail as string);
+      const email = session?.user?.email as string;
+      if (email) {
+        const unreadApplauds = (await getUnreadApplauds(email)) as ApplaudT[];
+        const unreadNumbers = unreadApplauds.length;
         if (unreadNumbers !== 0) {
-          setNumbers(unreadNumbers);
+          const convertToString = unreadNumbers.toString();
+          setNumbers(convertToString);
         }
       }
     })();
@@ -38,4 +41,4 @@ const Inbox: React.FC<InboxProps> = ({ session }) => {
   );
 };
 
-export default Inbox;
+export default InboxUnreadCount;

@@ -1,10 +1,10 @@
 'use client';
-import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import { ApplaudT } from '@/types/ApplaudT';
-import { getAllApplauds, setApplaudRead } from '@/libs/DB';
+import Link from 'next/link';
 import BackButton from '@/components/button/back-button';
+import { getAllApplauds } from '@/libs/applauds/applaud-actions';
+import { ApplaudT } from '@/types/ApplaudT';
 
 const Inbox = () => {
   const [filteredApplauds, setFilteredApplauds] = useState<ApplaudT[]>([]);
@@ -15,7 +15,7 @@ const Inbox = () => {
 
   useEffect(() => {
     (async () => {
-      const applauds: ApplaudT[] = await getAllApplauds();
+      const applauds = (await getAllApplauds()) as ApplaudT[];
       const filteredApplauds = applauds.filter(
         (applaud) => applaud.receiver.name === fullName
       );

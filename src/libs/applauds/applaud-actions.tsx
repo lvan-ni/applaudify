@@ -20,12 +20,30 @@ const getAllApplauds = async () => {
   }
 };
 
+const getUnreadApplauds = async (userEmail: string) => {
+  try {
+    const unreadApplauds = await prisma.applaud.findMany({
+      where: {
+        receiver: { email: userEmail },
+        isRead: false,
+      },
+      include: {
+        sender: true,
+        receiver: true,
+      },
+    });
+    return unreadApplauds;
+  } catch (error) {
+    console.error(`------> Prisma GetUnreadApplauds Error: `, error);
+  }
+};
+
 const getPublishedApplauds = async (userEmail: string) => {
   try {
     const publishedApplauds = await prisma.applaud.findMany({
       where: {
-        isPublished: true,
         receiver: { email: userEmail },
+        isPublished: true,
       },
       include: {
         sender: true,
@@ -38,4 +56,4 @@ const getPublishedApplauds = async (userEmail: string) => {
   }
 };
 
-export { getAllApplauds, getPublishedApplauds };
+export { getAllApplauds, getUnreadApplauds, getPublishedApplauds };
