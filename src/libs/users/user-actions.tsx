@@ -2,7 +2,7 @@
 
 import prisma from '../../../prisma/client';
 import { NewUserT } from '@/types/NewUserT';
-import { NewProfileInfoT } from '@/types/newProfileInfoT';
+import { NewProfileInfoT } from '@/types/NewProfileInfoT';
 
 const getAllUsers = async () => {
   try {
