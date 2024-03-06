@@ -1,29 +1,31 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { getAllMembers, getPublishedApplauds } from '@/libs/DB';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { initialTabs as tabs } from '@/types/Tabs';
 import Header from '@/components/header/header';
 import Inbox from '@/components/inbox/inbox';
 import CardForProfile from '@/components/applaud-card/profile';
 import MockAppluadCards from '@/components/applaud-card/mock';
+import { getAllUsers } from '@/libs/users/user-actions';
+import { getPublishedApplauds } from '@/libs/applauds/applaud-actions';
+import { UserT } from '@/types/UserT';
 import { ApplaudT } from '@/types/ApplaudT';
-import { MemberT } from '@/types/UserT';
-import { motion, AnimatePresence } from 'framer-motion';
-import { initialTabs as tabs } from '@/types/Tabs';
 
 const Profile = () => {
-  const [member, setMember] = useState<MemberT>();
+  const [user, setUser] = useState<UserT>();
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [activeTab, setActiveTab] = useState('Bio');
-  const [memberSkills, setMemberSkills] = useState<string[]>([]);
+  const [userSkills, setUserSkills] = useState<string[]>([]);
   const [individualApplauds, setIndividualApplauds] = useState<ApplaudT[]>([]);
   const { data: session } = useSession();
 
   const firstName = session?.user?.name?.split(' ')[0] as string;
   const imageURL = session?.user?.image as string;
-  const memberEmail = session?.user?.email;
+  const email = session?.user?.email as string;
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -31,18 +33,16 @@ const Profile = () => {
 
   useEffect(() => {
     (async () => {
-      const applauds = await getPublishedApplauds(memberEmail as string);
-      const members: MemberT[] = await getAllMembers();
-      const currentMember = members.find(
-        (member) => member.email === memberEmail
-      );
-      setMember(currentMember);
+      const applauds = (await getPublishedApplauds(email)) as ApplaudT[];
+      const users = (await getAllUsers()) as UserT[];
+      const currentUser = users.find((user) => user.email === email);
+      setUser(currentUser);
       setIndividualApplauds(applauds);
-      if (currentMember?.skills) {
-        setMemberSkills(currentMember.skills.split(','));
+      if (currentUser?.skills) {
+        setUserSkills(currentUser.skills.split(','));
       }
     })();
-  }, [memberEmail]);
+  }, [email]);
 
   return (
     <div className='flex flex-col mt-4 gap-10'>
@@ -72,9 +72,9 @@ const Profile = () => {
                 ></Image>
               )}
               <div className='w-3/5'>
-                <h4 className='body-large'>{member?.name}</h4>
-                <p className='body-small'>{member?.jobTitle}</p>
-                <p className='body-small'>{member?.company}</p>
+                <h4 className='body-large'>{user?.name}</h4>
+                <p className='body-small'>{user?.jobTitle}</p>
+                <p className='body-small'>{user?.company}</p>
               </div>
             </div>
           </div>
@@ -113,12 +113,12 @@ const Profile = () => {
               >
                 {activeTab === 'Bio' && (
                   <section className='flex flex-col'>
-                    <p>{member?.bio}</p>
+                    <p>{user?.bio}</p>
                   </section>
                 )}
                 {activeTab === 'Skills' && (
                   <section className='flex flex-wrap gap-2 justify-center'>
-                    {memberSkills.map((skill, index) => (
+                    {userSkills.map((skill, index) => (
                       <div
                         key={index}
                         className='skill-btn'
@@ -133,7 +133,7 @@ const Profile = () => {
                     className='flex flex-col gap-3'
                     style={{ whiteSpace: 'pre-wrap' }}
                   >
-                    {member?.experience}
+                    {user?.experience}
                   </section>
                 )}
               </motion.div>
