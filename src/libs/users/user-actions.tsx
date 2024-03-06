@@ -1,5 +1,6 @@
 'use server';
 
+import { profileToBeUpdatedT } from '@/types/newProfileInfoT';
 import prisma from '../../../prisma/client';
 import { NewUserT } from '@/types/NewUserT';
 
@@ -41,4 +42,22 @@ const checkAndAddUser = async (thisUserData: NewUserT) => {
   }
 };
 
-export { getAllUsers, checkAndAddUser };
+const updateUserProfile = async (
+  newProfileInfo: profileToBeUpdatedT,
+  userId: string
+) => {
+  try {
+    const toUpdate = await prisma.user.update({
+      where: {
+        userId: userId,
+      },
+      data: newProfileInfo,
+    });
+    return toUpdate;
+  } catch (error) {
+    console.error(`------> Prisma updateUserProfile Error: `, error);
+    throw error;
+  }
+};
+
+export { getAllUsers, checkAndAddUser, updateUserProfile };

@@ -1,4 +1,4 @@
-export type UpdatedMemberT = {
+export type newProfileInfoT = {
     name?: string;
     jobTitle?: string;
     company?: string;

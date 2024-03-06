@@ -3,19 +3,21 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import BackButton from '@/components/button/back-button';
-import { getAllMembers, updateMember } from '@/libs/DB';
-import { MemberT } from '@/types/UserT';
-import { UpdatedMemberT } from '@/types/UpdatedMemberT';
+import { getAllUsers } from '@/libs/users/user-actions';
+import { updateUserProfile } from '@/libs/users/user-actions';
+import { UserT } from '@/types/UserT';
+import { newProfileInfoT } from '@/types/newProfileInfoT';
 
 const EditProfile = () => {
   const { data: session } = useSession();
-  const [member, setMember] = useState<MemberT>();
-  const [memberName, setMemberName] = useState('');
-  const [memberJobTitle, setMemberJobTitle] = useState('');
-  const [memberCompany, setMemberCompany] = useState('');
-  const [memberBio, setMemberBio] = useState('');
-  const [memberExperience, setMemberExperience] = useState('');
-  const [memberSkills, setMemberSkills] = useState<string[]>([]);
+
+  const [user, setUser] = useState<UserT>();
+  const [userName, setUserName] = useState('');
+  const [userJobTitle, setUserJobTitle] = useState('');
+  const [userCompany, setUserCompany] = useState('');
+  const [userBio, setUserBio] = useState('');
+  const [userExperience, setUserExperience] = useState('');
+  const [userSkills, setUserSkills] = useState<string[]>([]);
   const [newSkill, setNewSkill] = useState<string>('');
   const [skillsErrorMessage, setSkillsErrorMessage] = useState<string>('');
   const [nameErrorMessage, setNameErrorMessage] = useState<string>('');
@@ -25,33 +27,31 @@ const EditProfile = () => {
   const newSkillRef = useRef<HTMLInputElement>(null);
   const experienceRef = useRef<HTMLTextAreaElement>(null);
   const imageURL = session?.user?.image as string;
-  const memberEmail = session?.user?.email;
+  const userEmail = session?.user?.email as string;
 
   useEffect(() => {
     if (!session) {
       return;
     }
     (async () => {
-      const members: MemberT[] = await getAllMembers();
-      const currentMember = members.find(
-        (member) => member.email === memberEmail
-      );
-      setMember(currentMember);
-      setMemberName(currentMember?.name as string);
-      setMemberJobTitle(currentMember?.jobTitle as string);
-      setMemberCompany(currentMember?.company as string);
-      setMemberBio(currentMember?.bio as string);
-      setMemberExperience(currentMember?.experience as string);
-      if (currentMember?.skills) {
-        setMemberSkills(currentMember.skills.split(','));
+      const users = (await getAllUsers()) as UserT[];
+      const currentUser = users.find((user) => user.email === userEmail);
+      setUser(currentUser);
+      setUserName(currentUser?.name as string);
+      setUserJobTitle(currentUser?.jobTitle as string);
+      setUserCompany(currentUser?.company as string);
+      setUserBio(currentUser?.bio as string);
+      setUserExperience(currentUser?.experience as string);
+      if (currentUser?.skills) {
+        setUserSkills(currentUser.skills.split(','));
       }
     })();
-  }, [session, memberEmail]);
+  }, [session, userEmail]);
 
   const handleRemoveSkill = (indexToRemove: number) => {
-    const updatedSkills = [...memberSkills];
+    const updatedSkills = [...userSkills];
     updatedSkills.splice(indexToRemove, 1);
-    setMemberSkills(updatedSkills);
+    setUserSkills(updatedSkills);
   };
 
   const handleAddSkill = () => {
@@ -61,11 +61,11 @@ const EditProfile = () => {
       return;
     }
     if (
-      !memberSkills.find(
+      !userSkills.find(
         (skill) => skill.toLowerCase() === newSkill.toLowerCase()
       )
     ) {
-      setMemberSkills([...memberSkills, newSkill]);
+      setUserSkills([...userSkills, newSkill]);
       setNewSkill('');
     } else {
       setSkillsErrorMessage('That skill is already added.');
@@ -82,36 +82,37 @@ const EditProfile = () => {
 
   const handleBioChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
-    setMemberBio(e.target.value);
+    setUserBio(e.target.value);
   };
 
   const handleExperienceChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
-    setMemberExperience(e.target.value);
+    setUserExperience(e.target.value);
   };
 
   const handleSave = () => {
-    if (memberName.trim() === '') {
+    if (userName.trim() === '') {
       setNameErrorMessage('Name cannot be empty.');
       setTimeout(() => {
         setNameErrorMessage('');
       }, 5000);
       return;
     }
-    const memberSkillsString = memberSkills.join(',');
-    const memberBio = bioRef.current?.value;
-    const memberExperience = experienceRef.current?.value;
+    const userSkillsString = userSkills.join(',');
+    const userBio = bioRef.current?.value;
+    const userExperience = experienceRef.current?.value;
+    const userId = user?.userId as string;
 
-    const updatedMember: UpdatedMemberT = {
-      name: memberName,
-      jobTitle: memberJobTitle,
-      company: memberCompany,
-      bio: memberBio,
-      skills: memberSkillsString,
-      experience: memberExperience,
+    const newProfileInfo: newProfileInfoT = {
+      name: userName,
+      jobTitle: userJobTitle,
+      company: userCompany,
+      bio: userBio,
+      skills: userSkillsString,
+      experience: userExperience,
     };
 
-    updateMember(updatedMember, member?.id as string);
+    updateUserProfile(newProfileInfo, userId);
 
     setTimeout(() => {
       window.location.href = '/profile';
@@ -145,23 +146,23 @@ const EditProfile = () => {
             <div className='flex flex-col gap-2'>
               <input
                 type='text'
-                value={memberName}
-                onChange={(e) => setMemberName(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
                 className='body-large bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
                 placeholder='Name'
               />
               {nameErrorMessage}
               <input
                 type='text'
-                value={memberJobTitle}
-                onChange={(e) => setMemberJobTitle(e.target.value)}
+                value={userJobTitle}
+                onChange={(e) => setUserJobTitle(e.target.value)}
                 className='body-small bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
                 placeholder='Job Title'
               />
               <input
                 type='text'
-                value={memberCompany}
-                onChange={(e) => setMemberCompany(e.target.value)}
+                value={userCompany}
+                onChange={(e) => setUserCompany(e.target.value)}
                 className='body-small bg-white text-charcoal border border-silver rounded-xl p-2 w-full'
                 placeholder='Company'
               />
@@ -176,7 +177,7 @@ const EditProfile = () => {
               rows={6}
               placeholder='Bio'
               ref={bioRef}
-              value={memberBio}
+              value={userBio}
               onChange={handleBioChange}
               className='border border-silver rounded-xl p-3'
               maxLength={1000}
@@ -184,7 +185,7 @@ const EditProfile = () => {
           </form>
           <div className='flex flex-col justify-center items-center gap-4'>
             <div className='flex gap-2 justify-center flex-wrap'>
-              {memberSkills.map((skill, index) => (
+              {userSkills.map((skill, index) => (
                 <div
                   key={index}
                   className='skill-btn'
@@ -217,7 +218,7 @@ const EditProfile = () => {
             rows={10}
             placeholder='Experience'
             ref={experienceRef}
-            value={memberExperience}
+            value={userExperience}
             onChange={handleExperienceChange}
             className='border border-silver rounded-xl p-3'
             maxLength={1000}
