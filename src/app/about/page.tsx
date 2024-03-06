@@ -41,6 +41,7 @@ const About = () => {
                 width={100}
               ></Image>
               <h4>Lvan Ni</h4>
+              <p className='body-small'>Frontend, Architect</p>
             </article>
           </Link>
           <Link href='https://www.linkedin.com/in/ilijakrilovic/'>
@@ -51,9 +52,10 @@ const About = () => {
                 width={100}
               ></Image>
               <h4>Ilija Krilovic</h4>
+              <p className='body-small'>Backend, DevOps</p>
             </article>
           </Link>
-          <Link href='https://www.linkedin.com/in/tim-hansson-meng/'>
+          {/* <Link href='https://www.linkedin.com/in/tim-hansson-meng/'>
             <article className='flex flex-col items-center'>
               <Image
                 src={tim}
@@ -72,7 +74,7 @@ const About = () => {
               ></Image>
               <h4 className='text-center'>Sudha Madhuri Poojari</h4>
             </article>
-          </Link>
+          </Link> */}
         </section>
       </main>
       <footer className='flex flex-col gap-10 mt-20 mx-10'>
