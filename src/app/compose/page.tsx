@@ -6,61 +6,54 @@ import React, {
   FormEvent,
   useRef,
 } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { getAllMembers, sendNewApplaud } from '@/libs/DB';
-import { MemberT } from '@/types/UserT';
+import { getAllUsers } from '@/libs/users/user-actions';
+import { sendNewApplaud } from '@/libs/applauds/applaud-actions';
+import { UserT } from '@/types/UserT';
 import { NewApplaudT } from '@/types/NewApplaudT';
-import back from '@/assets/nav/back.png';
 import BackButton from '@/components/button/back-button';
 
 const Compose = () => {
+  const { data: session } = useSession();
+
+  const [users, setUsers] = useState<UserT[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<UserT[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [applaudText, setApplaudText] = useState<string>(
     'Start a applaud here...'
   );
-  const [members, setMembers] = useState<MemberT[]>([]);
-  const [filteredMembers, setFilteredMembers] = useState<MemberT[]>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const { data: session } = useSession();
+
 
   const commentRef = useRef<HTMLTextAreaElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const currentEmail = session?.user?.email;
-  const currentMember = members.find(
-    (member: MemberT) => member.email === currentEmail
-  );
-  const currentMemberId = { id: currentMember?.id };
-  const receiver = members.find(
-    (member: MemberT) => member.name === searchValue
-  );
-  const receiverId = { id: receiver?.id };
+  const currentUser = users.find((user: UserT) => user.email === currentEmail);
+  const currentUserId = currentUser?.userId as string;
+  const receiver = users.find((user: UserT) => user.name === searchValue);
+  const receiverId = receiver?.userId as string;
 
   useEffect(() => {
-    getAllMembers()
-      .then((members) => {
-        setMembers(members);
-      })
-      .catch((error) => {
-        console.error('Error fetching members:', error);
-      });
+    (async () => {
+      const allUsers = (await getAllUsers()) as UserT[];
+      setUsers(allUsers);
+    })();
   }, []);
 
   useEffect(() => {
-    setFilteredMembers(
-      members.filter((member) =>
-        member.name.toLowerCase().includes(searchValue.toLowerCase())
+    setFilteredUsers(
+      users.filter((user) =>
+        user.name.toLowerCase().includes(searchValue.toLowerCase())
       )
     );
-  }, [searchValue, members]);
+  }, [searchValue, users]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
-  const handleMemberSelect = (name: string) => {
+  const handleUserSelect = (name: string) => {
     setSearchValue(name);
     setErrorMessage('');
   };
@@ -70,7 +63,7 @@ const Compose = () => {
 
     const applaudComment = commentRef.current?.value || '';
 
-    if (!members.some((member) => member.name === searchValue)) {
+    if (!users.some((user) => user.name === searchValue)) {
       setErrorMessage('Please select the receiver');
       return;
     }
@@ -82,9 +75,9 @@ const Compose = () => {
       return;
     }
     const newApplaud: NewApplaudT = {
-      sender: currentMemberId,
-      receiver: receiverId,
-      comment: applaudComment,
+      senderId: currentUserId,
+      receiverId: receiverId,
+      applaudContent: applaudComment,
     };
     sendNewApplaud(newApplaud);
     const form = formRef.current;
@@ -92,7 +85,7 @@ const Compose = () => {
 
     setTimeout(() => {
       window.location.href = '/inbox/sent';
-    }, 500);
+    }, 200);
   };
 
   const handleFocus = () => {
@@ -107,7 +100,7 @@ const Compose = () => {
     <div className='flex flex-col mx-10 mt-14 gap-10'>
       <header className='flex justify-between items-center'>
         <BackButton />
-        {searchValue && filteredMembers.length > 0 ? (
+        {searchValue && filteredUsers.length > 0 ? (
           <button
             className='header-nav'
             type='submit'
@@ -145,22 +138,20 @@ const Compose = () => {
           />
         </div>
         {searchValue &&
-          filteredMembers.length > 0 &&
-          (filteredMembers[0].name as string) !== (searchValue as string) && (
+          filteredUsers.length > 0 &&
+          (filteredUsers[0].name as string) !== (searchValue as string) && (
             <div>
-              {filteredMembers.map((member: MemberT) => (
+              {filteredUsers.map((user: UserT) => (
                 <div
-                  key={member.id}
-                  onClick={() => handleMemberSelect(member.name)}
+                  key={user.userId}
+                  onClick={() => handleUserSelect(user.name)}
                 >
-                  {member.name}
+                  {user.name}
                 </div>
               ))}
             </div>
           )}
-        {searchValue && filteredMembers.length === 0 && (
-          <div>No Member found</div>
-        )}
+        {searchValue && filteredUsers.length === 0 && <div>No User found</div>}
         {errorMessage}
         <textarea
           rows={10}
