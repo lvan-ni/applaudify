@@ -3,7 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import BackButton from '@/components/button/back-button';
-import { getAllApplauds } from '@/libs/applauds/applaud-actions';
+import {
+  getAllApplauds,
+  setApplaudToRead,
+} from '@/libs/applauds/applaud-actions';
 import { ApplaudT } from '@/types/ApplaudT';
 
 const Inbox = () => {
@@ -38,7 +41,7 @@ const Inbox = () => {
         <section className='flex flex-col gap-7 w-full'>
           {filteredApplauds.map((applaud) => {
             const firstName = applaud.sender.name.split(' ')[0];
-            const commentPreview = applaud.comment
+            const commentPreview = applaud.applaudContent
               .split(' ')
               .slice(0, 5)
               .join(' ');
@@ -55,15 +58,17 @@ const Inbox = () => {
               applaud && (
                 <article
                   className='flex flex-col px-5 py-3 gap-2 border border-silver rounded-3xl w-full bg-white'
-                  key={applaud.id}
+                  key={applaud.applaudId}
                 >
                   <Link
-                    href={`inbox/${applaud.id}`}
-                    onClick={() => setApplaudRead(applaud.id as string)}
+                    href={`inbox/${applaud.applaudId}`}
+                    onClick={() =>
+                      setApplaudToRead(applaud.applaudId as string)
+                    }
                   >
                     <div className='flex justify-between w-full items-center'>
                       <div className='flex items-center justify-center gap-5'>
-                        {!applaud.read && (
+                        {!applaud.isRead && (
                           <h4 className='button text-blue'>•</h4>
                         )}
                         {<h4 className='button font-bold'>{firstName}</h4>}

@@ -15,7 +15,7 @@ const getAllApplauds = async () => {
     });
     return allApplauds;
   } catch (error) {
-    console.error(`------> Prisma GetAllApplauds Error: `, error);
+    console.error(`------> Prisma getAllApplauds Error: `, error);
     throw error;
   }
 };
@@ -34,7 +34,25 @@ const getUnreadApplauds = async (userEmail: string) => {
     });
     return unreadApplauds;
   } catch (error) {
-    console.error(`------> Prisma GetUnreadApplauds Error: `, error);
+    console.error(`------> Prisma getUnreadApplauds Error: `, error);
+    throw error;
+  }
+};
+
+const setApplaudToRead = async (applaudId: string) => {
+  try {
+    const updateApplaud = await prisma.applaud.update({
+      where: {
+        applaudId: applaudId,
+      },
+      data: {
+        isRead: true,
+      },
+    });
+    return updateApplaud;
+  } catch (error) {
+    console.error(`------> Prisma setApplaudToRead Error: `, error);
+    throw error;
   }
 };
 
@@ -52,8 +70,14 @@ const getPublishedApplauds = async (userEmail: string) => {
     });
     return publishedApplauds;
   } catch (error) {
-    console.error(`------> Prisma GetPublishedApplauds Error: `, error);
+    console.error(`------> Prisma getPublishedApplauds Error: `, error);
+    throw error;
   }
 };
 
-export { getAllApplauds, getUnreadApplauds, getPublishedApplauds };
+export {
+  getAllApplauds,
+  getUnreadApplauds,
+  setApplaudToRead,
+  getPublishedApplauds,
+};
