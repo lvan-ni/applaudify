@@ -4,9 +4,10 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { initialTabs as tabs } from '@/types/Tabs';
 import Header from '@/components/header/header';
 import Inbox from '@/components/inbox/inbox';
-import ProfileInfo from '@/components/profile-info/profile-info';
 import CardForProfile from '@/components/applaud-card/profile';
 import MockAppluadCards from '@/components/applaud-card/mock';
 import { getAllUsers } from '@/libs/users/user-actions';
@@ -15,13 +16,20 @@ import { UserT } from '@/types/UserT';
 import { ApplaudT } from '@/types/ApplaudT';
 
 const Profile = () => {
-  const { data: session } = useSession();
   const [user, setUser] = useState<UserT>();
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
+  const [activeTab, setActiveTab] = useState('Bio');
+  const [userSkills, setUserSkills] = useState<string[]>([]);
   const [individualApplauds, setIndividualApplauds] = useState<ApplaudT[]>([]);
+  const { data: session } = useSession();
 
   const firstName = session?.user?.name?.split(' ')[0] as string;
   const imageURL = session?.user?.image as string;
   const email = session?.user?.email as string;
+
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+  };
 
   useEffect(() => {
     (async () => {
@@ -30,12 +38,11 @@ const Profile = () => {
       const currentUser = users.find((user) => user.email === email);
       setUser(currentUser);
       setIndividualApplauds(applauds);
+      if (currentUser?.skills) {
+        setUserSkills(currentUser.skills.split(','));
+      }
     })();
   }, [email]);
-
-  const bio = user?.bio as string;
-  const skills = user?.skills?.split(',') as string[];
-  const experience = user?.experience as string;
 
   return (
     <div className='flex flex-col mt-4 gap-10'>
@@ -71,11 +78,67 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <ProfileInfo
-            bio={bio}
-            skills={skills}
-            experience={experience}
-          />
+          <nav className='flex justify-around w-full'>
+            {tabs.map((item) => (
+              <button
+                key={item.label}
+                className={`${
+                  item === selectedTab
+                    ? 'profile-button clicked'
+                    : 'profile-button'
+                } w-24 p-2 border border-silver/50 rounded-3xl body-small`}
+                onClick={() => {
+                  handleTabClick(item.label);
+                  setSelectedTab(item);
+                }}
+              >
+                {`${item.label}`}
+                {item === selectedTab ? (
+                  <motion.div
+                    className='underline'
+                    layoutId='underline'
+                  />
+                ) : null}
+              </button>
+            ))}
+          </nav>
+          <div>
+            <AnimatePresence mode='wait'>
+              <motion.div
+                key={selectedTab ? selectedTab.label : 'empty'}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {activeTab === 'Bio' && (
+                  <section className='flex flex-col'>
+                    <p>{user?.bio}</p>
+                  </section>
+                )}
+                {activeTab === 'Skills' && (
+                  <section className='flex flex-wrap gap-2 justify-center'>
+                    {userSkills.map((skill, index) => (
+                      <div
+                        key={index}
+                        className='skill-btn'
+                      >
+                        {skill}
+                      </div>
+                    ))}
+                  </section>
+                )}
+                {activeTab === 'Experience' && (
+                  <section
+                    className='flex flex-col gap-3'
+                    style={{ whiteSpace: 'pre-wrap' }}
+                  >
+                    {user?.experience}
+                  </section>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </section>
         <h3 className='sub-title'>{firstName}&apos;s applauds</h3>
         <section className='flex flex-col w-full'>
