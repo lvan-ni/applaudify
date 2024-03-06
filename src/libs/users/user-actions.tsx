@@ -8,31 +8,36 @@ const getAllUsers = async () => {
     const allUsers = await prisma.user.findMany();
     return allUsers;
   } catch (error) {
-    console.error(`------> Prisma GetAllUsers Error: `, error);
+    console.error(`------> Prisma getAllUsers Error: `, error);
     throw error;
   }
 };
 
 const checkAndAddUser = async (thisUserData: NewUserT) => {
-  const { email, name, avatarURL } = thisUserData;
-  const userExists = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-
-  if (!userExists) {
-    const newUser = await prisma.user.create({
-      data: {
+  try {
+    const { email, name, avatarURL } = thisUserData;
+    const userExists = await prisma.user.findUnique({
+      where: {
         email: email,
-        name: name,
-        avatarURL: avatarURL,
       },
     });
-    return newUser;
-  } else {
-    console.log(`------> User with email ${email} already exists.`);
-    return userExists;
+
+    if (!userExists) {
+      const newUser = await prisma.user.create({
+        data: {
+          email: email,
+          name: name,
+          avatarURL: avatarURL,
+        },
+      });
+      return newUser;
+    } else {
+      console.log(`------> User with email ${email} already exists.`);
+      return userExists;
+    }
+  } catch (error) {
+    console.error(`------> Prisma checkAndAddUser Error: `, error);
+    throw error;
   }
 };
 
