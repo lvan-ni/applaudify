@@ -63,7 +63,7 @@ const SingleApplaud = async ({ params }: { params: { slug: string } }) => {
         </div>
         {isPublished ? (
           <div className='flex flex-col items-center w-full mt-5'>
-            <p className='body-small mt-5 text-silver'>Published Applaud</p>
+            <p className='body-small mt-5 text-silver'>Applaud is published!</p>
             <UnpublishButton slug={slug} />
           </div>
         ) : (

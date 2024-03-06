@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { setApplaudPublished } from '@/libs/DB';
+import { publishApplaud } from '@/libs/applauds/applaud-actions';
 import { useAnimate, animate, stagger } from 'framer-motion';
 
 type PublishButtonProps = {
@@ -9,7 +9,7 @@ type PublishButtonProps = {
 };
 type AnimationSequence = Parameters<typeof animate>[0];
 
-const PublishButton: React.FC<PublishButtonProps> = ({ slug }) => {
+const PublishButton = ({ slug }: PublishButtonProps) => {
   const router = useRouter();
   const [scope, animate] = useAnimate();
 
@@ -18,11 +18,11 @@ const PublishButton: React.FC<PublishButtonProps> = ({ slug }) => {
   };
 
   const handlePublishClick = () => {
-    setApplaudPublished(slug);
+    publishApplaud(slug);
     setTimeout(() => {
       router.refresh();
       window.location.reload();
-    }, 800);
+    }, 1000);
 
     const sparkles = Array.from({ length: 20 });
 
@@ -31,7 +31,7 @@ const PublishButton: React.FC<PublishButtonProps> = ({ slug }) => {
       {
         x: randomNumberBetween(-100, 100),
         y: randomNumberBetween(-100, 100),
-        scale: randomNumberBetween(1.5, 2.5),
+        scale: randomNumberBetween(1.5, 5.5),
         opacity: 1,
       },
       {

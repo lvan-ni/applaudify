@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { setApplaudUnpublished } from '@/libs/DB';
+import { unpublishApplaud } from '@/libs/applauds/applaud-actions';
 import { useRouter } from 'next/navigation';
 
 type PublishButtonProps = {
@@ -10,11 +10,11 @@ type PublishButtonProps = {
 const UnpublishButton: React.FC<PublishButtonProps> = ({ slug }) => {
   const router = useRouter();
   const handlePublishClick = () => {
-    setApplaudUnpublished(slug);
+    unpublishApplaud(slug);
     setTimeout(() => {
       router.refresh();
       window.location.reload();
-    }, 200);
+    }, 300);
   };
   return (
     <button

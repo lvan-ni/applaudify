@@ -56,6 +56,23 @@ const setApplaudToRead = async (applaudId: string) => {
   }
 };
 
+const publishApplaud = async (applaudId: string) => {
+  try {
+    const published = await prisma.applaud.update({
+      where: {
+        applaudId: applaudId,
+      },
+      data: {
+        isPublished: true,
+      },
+    });
+    return published;
+  } catch (error) {
+    console.error(`------> Prisma publishApplaud Error: `, error);
+    throw error;
+  }
+};
+
 const getPublishedApplauds = async (userEmail: string) => {
   try {
     const publishedApplauds = await prisma.applaud.findMany({
@@ -75,9 +92,28 @@ const getPublishedApplauds = async (userEmail: string) => {
   }
 };
 
+const unpublishApplaud = async (applaudId: string) => {
+  try {
+    const unpublish = await prisma.applaud.update({
+      where: {
+        applaudId: applaudId,
+      },
+      data: {
+        isPublished: false,
+      },
+    });
+    return unpublish;
+  } catch (error) {
+    console.error(`------> Prisma unPublishApplaud Error: `, error);
+    throw error;
+  }
+};
+
 export {
   getAllApplauds,
   getUnreadApplauds,
   setApplaudToRead,
+  publishApplaud,
   getPublishedApplauds,
+  unpublishApplaud,
 };
