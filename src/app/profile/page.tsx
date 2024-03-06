@@ -17,7 +17,7 @@ import { ApplaudT } from '@/types/ApplaudT';
 const Profile = () => {
   const { data: session } = useSession();
   const [user, setUser] = useState<UserT>();
-  const [individualApplauds, setIndividualApplauds] = useState<ApplaudT[]>([]);
+  const [thisUserApplauds, setThisUserApplauds] = useState<ApplaudT[]>([]);
 
   const firstName = session?.user?.name?.split(' ')[0] as string;
   const imageURL = session?.user?.image as string;
@@ -29,7 +29,7 @@ const Profile = () => {
       const users = (await getAllUsers()) as UserT[];
       const currentUser = users.find((user) => user.email === email);
       setUser(currentUser);
-      setIndividualApplauds(applauds);
+      setThisUserApplauds(applauds);
     })();
   }, [email]);
 
@@ -79,7 +79,7 @@ const Profile = () => {
         </section>
         <h3 className='sub-title'>{firstName}&apos;s applauds</h3>
         <section className='flex flex-col w-full'>
-          <CardForProfile applauds={individualApplauds} />
+          <CardForProfile applauds={thisUserApplauds} />
           <MockAppluadCards
             firstName={firstName}
             imageURL={imageURL}

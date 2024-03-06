@@ -25,6 +25,7 @@ const getPublishedApplauds = async (userEmail: string) => {
     const publishedApplauds = await prisma.applaud.findMany({
       where: {
         isPublished: true,
+        receiver: { email: userEmail },
       },
       include: {
         sender: true,
