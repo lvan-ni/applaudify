@@ -34,21 +34,21 @@ const Header = () => {
   const menuVariants = {
     initial: {
       opacity: 0,
-      scale: 0.95
+      scale: 0.95,
     },
     animate: {
       opacity: 1,
       scale: 1,
       transition: {
         duration: 0.2,
-        ease: "easeInOut"
+        ease: 'easeInOut',
       },
     },
     exit: {
       opacity: 0,
       transition: {
         duration: 0.2,
-        ease: "easeInOut"
+        ease: 'easeInOut',
       },
     },
   };
@@ -87,7 +87,7 @@ const Header = () => {
   };
 
   return (
-    <header className='sticky top-0 px-10 py-2.5 backdrop-blur-xl border-b bg-light/50 border-silver/50 flex flex-col w-full justify-between items-center gap-3 z-10'>
+    <header className='sticky top-0 px-10 py-2.5 border-b bg-light/50 border-silver/50 flex flex-col w-full justify-between items-center gap-3 z-10'>
       <div className='flex w-full bg-transparent items-center justify-between'>
         <Link href='/'>
           <h1 className='header ombre-text'>applaudify</h1>
@@ -109,7 +109,7 @@ const Header = () => {
                 className='origin-top h-screen w-full fixed left-0 top-0 gap-40 px-10 py-4 z-10 bg-light'
               >
                 <div className='flex h-full flex-col'>
-                  <div className='flex justify-between items-center'>
+                  <div className='flex justify-between items-center pt-2'>
                     <Link href='/'>
                       <h1 className='header ombre-text'>applaudify</h1>
                     </Link>
