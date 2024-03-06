@@ -1,7 +1,4 @@
-// 'use client';
 import React from 'react';
-// import { signOut, useSession } from 'next-auth/react';
-// import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import Header from '@/components/header/header';
 

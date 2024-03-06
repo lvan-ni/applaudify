@@ -7,7 +7,6 @@ import { getAllUsers } from '@/libs/users/user-actions';
 import { getPublishedApplauds } from '@/libs/applauds/applaud-actions';
 import { ApplaudT } from '@/types/ApplaudT';
 
-
 const userProfile = async ({ params }: { params: { userId: string } }) => {
   const { userId } = params;
   const allUsers = await getAllUsers();
