@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getAllApplauds } from '@/libs/DB';
+import { getAllApplauds } from '@/libs/applauds/applaud-actions';
 import { ApplaudT } from '@/types/ApplaudT';
 import PublishButton from '@/components/button/publish-button';
 import UnpublishButton from '@/components/button/unpublish-button';
@@ -10,9 +10,11 @@ import BackButton from '@/components/button/back-button';
 const SingleApplaud = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const applauds = (await getAllApplauds()) as ApplaudT[];
-  const filteredApplaud = applauds.filter((applaud) => applaud.id === slug);
+  const filteredApplaud = applauds.filter(
+    (applaud) => applaud.applaudId === slug
+  );
 
-  const { sender, comment, published, createdAt } = filteredApplaud[0];
+  const { sender, applaudContent, isPublished, createdAt } = filteredApplaud[0];
   const date = new Date(createdAt);
   const dateString = date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -33,15 +35,15 @@ const SingleApplaud = async ({ params }: { params: { slug: string } }) => {
             <article className='flex flex-col items-center gap-2'>
               <p className='send-date-lg'>{dateString}</p>
               <p className='p-2.5 body-main text-center'>
-                &apos;{comment}&apos;
+                &apos;{applaudContent}&apos;
               </p>
             </article>
             <article className='flex flex-col items-center'>
               <p className='sender-info-lg text-stone'>From</p>
-              <Link href={`/member/${sender.id}`}>
+              <Link href={`/user/${sender.userId}`}>
                 <div className='sender-layout-lg'>
                   <Image
-                    src={sender.avatarUrl}
+                    src={sender.avatarURL}
                     alt='Sender Profile'
                     width={50}
                     height={50}
@@ -59,7 +61,7 @@ const SingleApplaud = async ({ params }: { params: { slug: string } }) => {
             </article>
           </section>
         </div>
-        {published ? (
+        {isPublished ? (
           <div className='flex flex-col items-center w-full mt-5'>
             <p className='body-small mt-5 text-silver'>Published Applaud</p>
             <UnpublishButton slug={slug} />
