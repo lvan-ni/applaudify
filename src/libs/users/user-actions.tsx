@@ -8,7 +8,7 @@ const getAllUsers = async () => {
     const allUsers = await prisma.user.findMany();
     return allUsers;
   } catch (error) {
-    console.error('------> Prisma GetAllUsers Error: ', error);
+    console.error(`------> Prisma GetAllUsers Error: `, error);
     throw error;
   }
 };

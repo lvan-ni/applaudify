@@ -15,9 +15,26 @@ const getAllApplauds = async () => {
     });
     return allApplauds;
   } catch (error) {
-    console.error('------> Prisma GetAllApplauds Error: ', error);
+    console.error(`------> Prisma GetAllApplauds Error: `, error);
     throw error;
   }
 };
 
-export default getAllApplauds;
+const getPublishedApplauds = async (userEmail: string) => {
+  try {
+    const publishedApplauds = await prisma.applaud.findMany({
+      where: {
+        isPublished: true,
+      },
+      include: {
+        sender: true,
+        receiver: true,
+      },
+    });
+    return publishedApplauds;
+  } catch (error) {
+    console.error(`------> Prisma GetPublishedApplauds Error: `, error);
+  }
+};
+
+export { getAllApplauds, getPublishedApplauds };
