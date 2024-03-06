@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/button/back-button';
 
 const Vanessa = () => {
   const { data: session } = useSession();
@@ -48,9 +48,9 @@ const Vanessa = () => {
             </article>
           </section>
         </div>
-          <div className='flex flex-col items-center w-full mt-5'>
-            <p className='body-small mt-5 text-silver'>Published Applaud</p>
-          </div>
+        <div className='flex flex-col items-center w-full mt-5'>
+          <p className='body-small mt-5 text-silver'>Published Applaud</p>
+        </div>
       </main>
     </div>
   );

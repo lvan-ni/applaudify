@@ -1,4 +1,5 @@
 'use client';
+
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { checkAndAddUser } from '@/libs/users/user-actions';
@@ -9,7 +10,7 @@ const UserCheck = () => {
 
   useEffect(() => {
     if (!session) return;
-
+    
     const CheckAndAddUser = async () => {
       const thisUserData: NewUserT = {
         email: session.user?.email as string,

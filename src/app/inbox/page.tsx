@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { ApplaudT } from '@/types/ApplaudT';
 import { getAllApplauds, setApplaudRead } from '@/libs/DB';
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/button/back-button';
 
 const Inbox = () => {
   const [filteredApplauds, setFilteredApplauds] = useState<ApplaudT[]>([]);

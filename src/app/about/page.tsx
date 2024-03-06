@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import Header from '@/components/Header/Header';
+import Header from '@/components/header/header';
 import Image from 'next/image';
 import Link from 'next/link';
 import ilija from '@/assets/about/ilija.png';
@@ -9,7 +9,6 @@ import tim from '@/assets/about/tim.png';
 import sudha from '@/assets/about/sudha.png';
 
 const About = () => {
-
   return (
     <div className='flex flex-col items-center mb-10 mt-4'>
       <Header />

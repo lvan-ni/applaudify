@@ -2,10 +2,10 @@
 // import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { getAllMembers, getPublishedApplauds } from '@/libs/DB';
-import Header from '@/components/Header/Header';
-import ProfileInfo from '@/components/ProfileInfo/ProfileInfo';
-import CardForProfile from '@/components/CardForProfile/CardForProfile';
-import MockAppluadCards from '@/components/MockAppluadCards/MockAppluadCards';
+import Header from '@/components/header/header';
+import ProfileInfo from '@/components/profile-info/profile-info';
+import CardForProfile from '@/components/applaud-card/profile';
+import MockAppluadCards from '@/components/applaud-card/mock';
 // import { ApplaudT } from '@/types/ApplaudT';
 import { MemberT } from '@/types/UserT';
 

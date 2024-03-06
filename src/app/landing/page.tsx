@@ -3,10 +3,9 @@ import React from 'react';
 // import { signOut, useSession } from 'next-auth/react';
 // import { getServerSession } from 'next-auth';
 import Link from 'next/link';
-import Header from '@/components/Header/Header';
+import Header from '@/components/header/header';
 
 const Landing = async () => {
-
   return (
     <div className='flex flex-col items-center mt-4'>
       <Header />

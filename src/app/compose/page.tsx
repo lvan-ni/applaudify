@@ -13,7 +13,7 @@ import { getAllMembers, sendNewApplaud } from '@/libs/DB';
 import { MemberT } from '@/types/UserT';
 import { NewApplaudT } from '@/types/NewApplaudT';
 import back from '@/assets/nav/back.png';
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/button/back-button';
 
 const Compose = () => {
   const [searchValue, setSearchValue] = useState<string>('');

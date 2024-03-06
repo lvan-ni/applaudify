@@ -2,7 +2,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/button/back-button';
 import { getAllMembers, updateMember } from '@/libs/DB';
 import { MemberT } from '@/types/UserT';
 import { UpdatedMemberT } from '@/types/UpdatedMemberT';

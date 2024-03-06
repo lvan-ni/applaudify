@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/button/back-button';
 
 const Ahsan = () => {
   const { data: session } = useSession();

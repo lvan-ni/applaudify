@@ -1,6 +1,6 @@
-import Header from '@/components/Header/Header';
-import UserCheck from '@/components/login-user-check/user-check';
-import PlaudCardHome from '@/components/plaud-card/home';
+import Header from '@/components/header/header';
+import UserCheck from '@/components/check/user-check';
+import PlaudCardHome from '@/components/applaud-card/home';
 
 const Home = async () => {
   return (

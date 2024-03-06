@@ -5,7 +5,7 @@ import Image from 'next/image';
 import google from '@/assets/login/google.png';
 import github from '@/assets/login/github.png';
 import linkedin from '@/assets/login/linkedin.png';
-import BackButton from '@/components/BackButton/BackButton';
+import BackButton from '@/components/button/back-button';
 
 const Login = () => {
   return (
@@ -21,7 +21,7 @@ const Login = () => {
           </h3>
         </div>
         <div className='flex flex-col items-center gap-6 w-4/5 '>
-        <button
+          <button
             className='button login-btn'
             onClick={() => signIn('google', { callbackUrl: '/home' })}
           >
