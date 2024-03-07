@@ -8,7 +8,7 @@ const Landing = async () => {
       <Header />
       <main className='flex flex-col gap-20 mt-20 mx-10'>
         <section className='flex flex-col items-center gap-8'>
-          <h1 className='title-logo'>plaudify</h1>
+          <h1 className='title-logo'>applaudify</h1>
           <h3 className='sub-title text-center text-charcoal'>
             where achievements get applauded
           </h3>
@@ -73,7 +73,9 @@ const Landing = async () => {
         >
           Let&apos;s Start !
         </Link>
-        <p className='small text-center text-stone mt-20'>© 2023 Applaudify</p>
+        <p className='small text-center text-stone mt-20'>
+          © 2023 Apapplaudify
+        </p>
       </footer>
     </div>
   );
