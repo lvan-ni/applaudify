@@ -1,19 +1,12 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
 
 type MockCardForHomesProps = {
   firstName: string;
-  imageURL: string;
 };
 
-const MockAppluadCards: React.FC<MockCardForHomesProps> = ({
-  firstName,
-  imageURL,
-}) => {
-  const { data: session } = useSession();
-
+const MockAppluadCards = ({ firstName }: MockCardForHomesProps) => {
   return (
     <>
       {/* 1ST CARD */}

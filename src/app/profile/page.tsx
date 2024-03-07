@@ -80,10 +80,7 @@ const Profile = () => {
         <h3 className='sub-title'>{firstName}&apos;s applauds</h3>
         <section className='flex flex-col w-full'>
           <CardForProfile applauds={thisUserApplauds} />
-          <MockAppluadCards
-            firstName={firstName}
-            imageURL={imageURL}
-          />
+          <MockAppluadCards firstName={firstName} />
         </section>
       </main>
     </div>

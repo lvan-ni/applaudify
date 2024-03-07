@@ -48,10 +48,7 @@ const userProfile = async ({ params }: { params: { userId: string } }) => {
         <h3 className='sub-title'>{firstName}&apos;s applauds</h3>
         <section className='flex flex-col w-full'>
           <CardForProfile applauds={individualApplauds} />
-          <MockAppluadCards
-            firstName={firstName}
-            imageURL={user?.avatarURL!}
-          />
+          <MockAppluadCards firstName={firstName} />
         </section>
       </main>
     </div>

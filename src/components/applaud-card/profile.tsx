@@ -32,7 +32,7 @@ const CardForProfile = ({ applauds }: CardForProfileProps) => {
               </article>
               <article className='flex flex-col items-center'>
                 <p className='sender-info text-stone'>From</p>
-                <Link href={`/member/${sender.userId}`}>
+                <Link href={`/user/${sender.userId}`}>
                   <div className='sender-layout'>
                     <Image
                       src={sender.avatarURL}
