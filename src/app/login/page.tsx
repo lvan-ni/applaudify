@@ -15,7 +15,7 @@ const Login = () => {
       </header>
       <div className='flex flex-col items-center gap-36'>
         <div className='flex flex-col gap-5'>
-          <h1 className='title-logo ombre-text'>applaudify</h1>
+          <h1 className='title-logo ombre-text'>plaudify</h1>
           <h3 className='small-header text-center text-charcoal'>
             login / signup
           </h3>

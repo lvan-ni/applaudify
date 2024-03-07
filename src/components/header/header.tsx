@@ -90,7 +90,7 @@ const Header = () => {
     <header className='sticky top-0 px-10 py-2.5 border-b bg-light/50 border-silver/50 flex flex-col w-full justify-between items-center gap-3 z-10'>
       <div className='flex w-full bg-transparent items-center justify-between'>
         <Link href='/'>
-          <h1 className='header ombre-text'>applaudify</h1>
+          <h1 className='header ombre-text'>plaudify</h1>
         </Link>
         <div className='flex bg-transparent items-center gap-3'>
           <div
@@ -111,7 +111,7 @@ const Header = () => {
                 <div className='flex h-full flex-col'>
                   <div className='flex justify-between items-center pt-2'>
                     <Link href='/'>
-                      <h1 className='header ombre-text'>applaudify</h1>
+                      <h1 className='header ombre-text'>plaudify</h1>
                     </Link>
                     <Image
                       src={closeMenu}

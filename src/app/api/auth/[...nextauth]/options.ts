@@ -20,8 +20,14 @@ export const options: NextAuthOptions = {
       },
     }),
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId:
+        (process.env.GITHUB_CLIENT_ID_LOCAL as string) ||
+        (process.env.GITHUB_CLIENT_ID_DEV as string) ||
+        (process.env.GITHUB_CLIENT_ID_PROD as string),
+      clientSecret:
+        (process.env.GITHUB_CLIENT_SECRET_LOCAL as string) ||
+        (process.env.GITHUB_CLIENT_SECRET_DEV as string) ||
+        (process.env.GITHUB_CLIENT_SECRET_PROD as string),
     }),
     LinkedInProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID as string,
