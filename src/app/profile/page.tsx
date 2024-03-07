@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import Header from '@/components/header/header';
+import Header from '@/components/header new/header';
 import InboxUnreadCount from '@/components/check/inbox-unread-count';
 import ProfileInfo from '@/components/profile-info/profile-info';
 import CardForProfile from '@/components/applaud-card/profile';
