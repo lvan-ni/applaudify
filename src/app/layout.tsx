@@ -8,7 +8,7 @@ const josefin = Josefin_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'applaudify',
-  description: 'Where Achievements Get Applauded',
+  description: 'where achievements get applauded',
 };
 
 export default function RootLayout({
