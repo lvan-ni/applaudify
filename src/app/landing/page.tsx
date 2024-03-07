@@ -4,7 +4,7 @@ import Header from '@/components/header/header';
 
 const Landing = async () => {
   return (
-    <div className='flex flex-col items-center mt-4'>
+    <div className='flex flex-col items-center mb-8 mt-4'>
       <Header />
       <main className='flex flex-col gap-20 mt-20 mx-10'>
         <section className='flex flex-col items-center gap-8'>
@@ -63,7 +63,7 @@ const Landing = async () => {
           </article>
         </section>
       </main>
-      <footer className='flex flex-col gap-10 mt-20 mx-10'>
+      <footer className='flex flex-col gap-10 mt-6 mx-10'>
         <h3 className='sub-title text-center text-charcoal'>
           ready to showcase your achievements?
         </h3>
@@ -74,7 +74,7 @@ const Landing = async () => {
           Let&apos;s Start !
         </Link>
         <p className='small text-center text-stone mt-20'>
-          © 2023 Apapplaudify
+          © 2023-2024 applaudify
         </p>
       </footer>
     </div>

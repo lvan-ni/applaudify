@@ -93,7 +93,7 @@ const About = () => {
       </main>
       <footer className='flex flex-col gap-10 mt-6 mx-10'>
         <p className='small text-center text-stone mt-20'>
-          © 2023-2024 Apapplaudify
+          © 2023-2024 applaudify
         </p>
       </footer>
     </div>
