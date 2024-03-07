@@ -13,7 +13,7 @@ model applaud {
   receiver       user     @relation("receiver", fields: [receiverId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "fk4xryanjhxq89hiadx8yjd22f2")
   senderId       String   @db.Uuid
   sender         user     @relation("sender", fields: [senderId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "fkidp0ie7d7g0unyckfwtbmcpb3")
-  applaudContent String   @db.VarChar(255)
+  applaudContent String   @db.Text
   isRead         Boolean  @default(false)
   isPublished    Boolean  @default(false)
   createdAt      DateTime @default(now()) @db.Timestamp(6)
