@@ -24,7 +24,6 @@ const Compose = () => {
   );
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-
   const commentRef = useRef<HTMLTextAreaElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -61,13 +60,13 @@ const Compose = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const applaudComment = commentRef.current?.value || '';
+    const applaudContent = commentRef.current?.value || '';
 
     if (!users.some((user) => user.name === searchValue)) {
       setErrorMessage('Please select the receiver');
       return;
     }
-    if (!applaudComment || applaudComment.trim() === '') {
+    if (!applaudContent || applaudContent.trim() === '') {
       setErrorMessage("Let's finish the Applaud before sending");
       setTimeout(() => {
         setErrorMessage('');
@@ -77,8 +76,9 @@ const Compose = () => {
     const newApplaud: NewApplaudT = {
       senderId: currentUserId,
       receiverId: receiverId,
-      applaudContent: applaudComment,
+      applaudContent: applaudContent,
     };
+
     sendNewApplaud(newApplaud);
     const form = formRef.current;
     form?.reset();

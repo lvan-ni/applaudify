@@ -1,5 +1,5 @@
 export type NewApplaudT = {
-  senderId: string;
   receiverId: string;
+  senderId: string;
   applaudContent: string;
 };
