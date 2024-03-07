@@ -7,8 +7,8 @@ import SessionCheck from '@/components/check/session-check';
 const josefin = Josefin_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Apapplaudify',
-  description: 'Where Achievements Get Applauded',
+  title: 'applaudify',
+  description: 'where achievements get applauded',
 };
 
 export default function RootLayout({
