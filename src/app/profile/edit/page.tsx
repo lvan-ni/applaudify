@@ -6,7 +6,7 @@ import BackButton from '@/components/button/back-button';
 import { getAllUsers } from '@/libs/users/user-actions';
 import { updateUserProfile } from '@/libs/users/user-actions';
 import { UserT } from '@/types/UserT';
-import { NewProfileInfoT } from '@/types/newProfileInfoT';
+import { NewProfileInfoT } from '@/types/NewProfileInfoT-new';
 
 const EditProfile = () => {
   const { data: session } = useSession();
