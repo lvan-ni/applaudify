@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Header from '@/components/header new/header';
+import Header from '@/components/header/header';
 
 const Landing = async () => {
   return (

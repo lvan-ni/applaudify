@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Header from '@/components/header new/header';
+import Header from '@/components/header/header';
 import ProfileInfo from '@/components/profile-info/profile-info';
 import CardForProfile from '@/components/applaud-card/profile';
 import MockAppluadCards from '@/components/applaud-card/mock';

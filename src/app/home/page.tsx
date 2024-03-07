@@ -1,4 +1,4 @@
-import Header from '@/components/header new/header';
+import Header from '@/components/header/header';
 import UserCheck from '@/components/check/user-check';
 import PlaudCardHome from '@/components/applaud-card/home';
 
