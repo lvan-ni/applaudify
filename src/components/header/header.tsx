@@ -15,12 +15,17 @@ const Header = () => {
 
   const navLinks = [
     {
-      text: 'About',
+      text: 'How It Works',
+      href: '/landing',
+    },
+
+    {
+      text: 'About Us',
       href: '/about',
     },
     {
-      text: 'Docs',
-      href: 'https://github.com/orgs/team-blue-tea/repositories',
+      text: 'Source Code',
+      href: 'https://github.com/lvan-ni/applaudify',
       target: '_blank',
       rel: 'noopener noreferrer',
     },
