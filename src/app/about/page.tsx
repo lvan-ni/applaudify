@@ -16,7 +16,7 @@ const About = () => {
         <section className='flex flex-col gap-6'>
           <h3 className='sub-title'>About Us</h3>
           <p className='body-main text-stone'>
-            At Apapplaudify, we understand that for freelancers and consultants,
+            At applaudify, we understand that for freelancers and consultants,
             every project is a testament to their adaptability, creativity, and
             commitment. Hence, our platform doesn&apos;t just stop at collecting
             affirmations; it transforms them into a dynamic journey. This not
@@ -28,7 +28,7 @@ const About = () => {
         <section className='flex flex-col gap-6'>
           <h3 className='sub-title'>Our Team</h3>
           <p className='body-main text-stone'>
-            Behind Apapplaudify is a team of dedicated individuals, each
+            Behind applaudify is a team of dedicated individuals, each
             bringing a unique set of skills and experiences to the table:
           </p>
           <div className='grid grid-cols-2 gap-10'>

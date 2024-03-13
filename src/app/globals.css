@@ -5,7 +5,29 @@
 @tailwind utilities;
 
 @layer components {
-  /* Text Styles */
+  /* ------ LAYOUT ------ */
+
+  /* ------ CARD ------ */
+  .applaud-card {
+    @apply flex flex-col items-center justify-center p-4 mb-8 gap-5 border-solid border border-silver/50 bg-white rounded-3xl;
+  }
+  .sender-layout {
+    @apply flex items-center gap-2 px-3.5 pt-2;
+  }
+  .sender-layout-lg {
+    @apply flex items-center gap-4 px-3.5 pt-4;
+  }
+  .receiver-layout {
+    @apply flex flex-col w-full items-center justify-center p-2.5 gap-2.5 border-b border-silver/50;
+  }
+  .receiver-spacing {
+    @apply;
+  }
+  .profile-img {
+    @apply rounded-full;
+  }
+
+  /* ------ TEXT ------ */
   .header-nav {
     @apply font-avenir text-16 font-500 capitalize cursor-pointer;
   }
@@ -16,7 +38,7 @@
     @apply font-josefin text-24 font-700 lowercase;
   }
   .sub-title {
-    @apply font-josefin text-30 font-600;
+    @apply font-avenir text-30 font-500;
   }
   .sub-header {
     @apply font-avenir text-16 font-500 lowercase;
@@ -70,27 +92,7 @@
     @apply font-avenir text-10 font-500;
   }
 
-  /* Applaud Card Layout */
-  .applaud-card {
-    @apply flex flex-col items-center justify-center p-4 mb-8 gap-5 border-solid border border-silver/50 bg-white rounded-3xl;
-  }
-  .sender-layout {
-    @apply flex items-center gap-2 px-3.5 pt-2;
-  }
-  .sender-layout-lg {
-    @apply flex items-center gap-4 px-3.5 pt-4;
-  }
-  .receiver-layout {
-    @apply flex flex-col w-full items-center justify-center p-2.5 gap-2.5 border-b border-silver/50;
-  }
-  .receiver-spacing {
-    @apply;
-  }
-  .profile-img {
-    @apply rounded-full;
-  }
-
-  /* Button */
+  /* ------ BUTTON ------ */
   .header-btn {
     @apply flex items-center border-solid border border-silver/50 rounded-3xl px-2.5 py-1 h-8 bg-white;
   }
@@ -109,7 +111,6 @@
   .skill-btn {
     @apply flex items-center border-solid border border-silver rounded-3xl px-2.5 py-1 h-8 body-skill;
   }
-
   .ombre-text {
     @apply bg-transparent;
   }
@@ -153,7 +154,7 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  color: var(--core-metal);
+  /* color: var(--core-metal); */
 }
 
 body {

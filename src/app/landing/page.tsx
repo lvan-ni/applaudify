@@ -23,7 +23,7 @@ const Landing = async () => {
             Let&apos;s Start !
           </Link>
         </section>
-        <section className='flex flex-col items-center justify-center gap-24'>
+        <section className='flex flex-col items-start justify-center gap-24'>
           <article className='flex flex-col gap-5'>
             <div>
               <h4 className='sub-header text-grey'>

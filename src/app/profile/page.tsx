@@ -43,16 +43,16 @@ const Profile = () => {
       <main className='flex flex-col items-center gap-10 mx-10'>
         <section className='flex flex-col gap-8 items-center w-full'>
           <div className='flex w-full flex-col gap-3'>
-            <div className='flex items-center justify-end gap-4 '>
-              <Link
-                href='/profile/edit'
-                className='header-nav'
-              >
-                Edit
-              </Link>
+            <div className='flex flex-col gap-4 '>
               <div className='flex justify-end'>
                 {session && <InboxUnreadCount session={session} />}
               </div>
+              <Link
+                href='/profile/edit'
+                className='flex justify-end pr-2 body-small text-gray'
+              >
+                Edit
+              </Link>
             </div>
             <div className='flex items-center justify-center w-full gap-8 px-2 py-3'>
               {session && (
