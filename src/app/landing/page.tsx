@@ -2,78 +2,83 @@ import React from 'react';
 import Link from 'next/link';
 import Header from '@/components/header/header';
 
-const Landing = async () => {
+const contentCopy = [
+  {
+    subHeading: 'all your applauds in one place',
+    heading: 'applaud inbox',
+    text: 'A dedicated space to receive and manage all your accolades. Choose which applauds highlight your profile.',
+    href: '/login',
+    link: 'Get Started',
+  },
+  {
+    subHeading: 'redefining your professional profile',
+    heading: 'dynamic profile',
+    text: 'Beyond a typical CV—showcase your journey, skills, and experiences, validated by the applause you&apos;ve earned.',
+    href: '/login',
+    link: 'Get Started',
+  },
+  {
+    subHeading: 'celebrate achievements together',
+    heading: 'social feed',
+    text: 'Engage with the community. Revel in shared successes and accolades. Don&apos;t forget to showcase your achievements!',
+    href: '/login',
+    link: 'Get Started',
+  },
+];
+
+const Landing = () => {
   return (
-    <div className='flex flex-col items-center mb-8 mt-4'>
+    <div className='page-layout'>
       <Header />
-      <main className='flex flex-col gap-20 mt-20 mx-10'>
-        <section className='flex flex-col items-center gap-8'>
-          <h1 className='title-logo'>applaudify</h1>
-          <h3 className='sub-title text-center text-charcoal'>
-            where achievements get applauded
-          </h3>
-          <p className='body-main text-stone text-center'>
-            Collect, manage, and showcase your professional testimonials -
-            because every applaud matters.
+      <section className='section-layout'>
+        <div className='title-4 tabletP:title-3 tabletL:title-1'>
+          <h1>archive.</h1>
+          <h1>applaud.</h1>
+          <h1>applaudify.</h1>
+        </div>
+        <div className='flex flex-col gap-4'>
+          <p className='body-2 tabletP:body-1'>
+            Collect, manage, and showcase your professional testimonials - every
+            applaud matters.
           </p>
           <Link
+            className='nav-2 tabletP:nav-1 underline hover:underline-offset-8'
             href='/login'
-            className='body-main start-btn'
           >
-            Let&apos;s Start !
+            Get Started
           </Link>
-        </section>
-        <section className='flex flex-col items-start justify-center gap-24'>
-          <article className='flex flex-col gap-5'>
-            <div>
-              <h4 className='sub-header text-grey'>
-                all your applauds in one place
-              </h4>
-              <h2 className='sub-title text-charcoal'>applauds inbox</h2>
-            </div>
-            <p className='body-small text-stone'>
-              A dedicated space to receive and manage all your accolades. Choose
-              which applauds highlight your profile. Remember to acknowledge the
-              remarkable work of others with an applause too!
-            </p>
-          </article>
-          <article className='flex flex-col gap-5'>
-            <div>
-              <h4 className='sub-header text-grey'>
-                celebrate achievements together
-              </h4>
-              <h2 className='sub-title text-charcoal'>social feed</h2>
-            </div>
-            <p className='body-small text-stone'>
-              Engage with the community. Revel in shared successes and
-              accolades. Don&apos;t forget to showcase your achievements!
-            </p>
-          </article>
-          <article className='flex flex-col gap-5'>
-            <div>
-              <h4 className='sub-header text-grey'>
-                redefining your professional profile
-              </h4>
-              <h2 className='sub-title text-charcoal'>dynamic profile</h2>
-            </div>
-            <p className='body-small text-stone'>
-              Beyond a typical CV—showcase your journey, skills, and
-              experiences, validated by the applause you&apos;ve earned.
-            </p>
-          </article>
-        </section>
-      </main>
-      <footer className='flex flex-col gap-10 mt-6 mx-10'>
-        <h3 className='sub-title text-center text-charcoal'>
-          ready to showcase your achievements?
-        </h3>
-        <Link
-          href='/login'
-          className='body-main start-btn'
-        >
-          Let&apos;s Start !
-        </Link>
-        <p className='small text-center text-stone mt-20'>
+        </div>
+      </section>
+      <div className='flex flex-col gap-20 tabletL:gap-40'>
+        {contentCopy.map((copy, index) => {
+          return (
+            <section
+              key={index + copy.text}
+              className='section-layout'
+            >
+              <div>
+                <h5 className='sub-heading-3 tabletP:sub-heading-2'>
+                  {copy.subHeading}
+                </h5>
+                <h1 className='title-4 tabletP:title-3 tabletL:title-2'>
+                  {copy.heading}
+                </h1>
+              </div>
+              <div>
+                <p className='body-2 tabletP:body-1'>{copy.text}</p>
+                <Link
+                  className='nav-2 tabletP:nav-1 underline hover:underline-offset-8'
+                  href={copy.href}
+                >
+                  {copy.link}
+                </Link>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+      <footer className='pt-20'>
+        <p className='info-3 tabletL:info-2 desktopL:info-1'>
           © 2023-2024 applaudify
         </p>
       </footer>

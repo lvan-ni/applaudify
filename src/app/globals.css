@@ -4,6 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply m-0 p-0 box-border;
+  }
+  body {
+    @apply bg-day text-sunrise;
+  }
+}
+
 @layer components {
   /* ------------ TYPOGRAPHY ------------ */
   /* Title */
@@ -59,22 +70,22 @@
     @apply font-avenir font-semibold text-18;
   }
   /* Name */
-  .name-1 {
+  .sub-heading-1 {
     @apply font-josefin font-bold text-24;
   }
-  .name-2 {
+  .sub-heading-2 {
     @apply font-josefin font-bold text-20;
   }
-  .name-3 {
+  .sub-heading-3 {
     @apply font-josefin font-bold text-18;
   }
-  .name-4 {
+  .sub-heading-4 {
     @apply font-josefin font-bold text-16;
   }
-  .name-5 {
+  .sub-heading-5 {
     @apply font-josefin font-bold text-14;
   }
-  .name-6 {
+  .sub-heading-6 {
     @apply font-josefin font-bold text-12;
   }
   /* Desc */
@@ -104,20 +115,25 @@
     @apply font-avenir font-medium text-10;
   }
 
+  /* ------ Landing ------ */
+
   /* ------------ LAYOUT ------------ */
   /* ------ PAGE ------ */
-  @media screen and (orientation: portrait){
-    .page {
-      @apply flex flex-col px-5 pt-5 pb-10 gap-10
-      @apply tabletP:px-10 tabletP:py-10 tabletP:gap-20
+  @media screen and (orientation: portrait) {
+    .page-layout {
+      @apply flex flex-col items-center px-5 pt-5 pb-10 gap-10;
+      @apply tabletP:px-10 tabletP:py-10 tabletP:gap-20;
+    }
+    .section-layout {
+      @apply flex flex-col gap-40
     }
   }
-@media screen and (orientation: landscape) {
-  .page {
-    @apply flex flex-col px-10 py-2.5 gap-5
-    @apply tabletL:py-5 tabletL:gap-10
-    @apply laptopL:px-40 laptopL:py-10
-    @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40
+  @media screen and (orientation: landscape) {
+    .page-layout {
+      @apply flex flex-col items-center px-10 py-2.5 gap-5;
+      @apply tabletL:py-5 tabletL:gap-10;
+      @apply laptopL:px-40 laptopL:py-10;
+      @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40;
+    }
   }
-}
 }

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import closeMenu from '@/assets/nav/close-menu.png';
+import logo from '@/assets/nav/logo-large.png';
+import menu from '@/assets/nav/menu-small.png';
 
 const Header = () => {
   const { data: session } = useSession();
@@ -15,23 +17,30 @@ const Header = () => {
 
   const navLinks = [
     {
-      text: 'How It Works',
+      text: session ? 'Inbox' : '',
+      href: '/inbox',
+    },
+    {
+      text: session ? 'Profile' : '',
+      href: '/profile',
+    },
+    {
+      text: session ? 'Learn' : '',
       href: '/landing',
     },
-
     {
-      text: 'About Us',
+      text: 'About',
       href: '/about',
     },
     {
-      text: 'Source Code',
+      text: 'GitHub',
       href: 'https://github.com/lvan-ni/applaudify',
       target: '_blank',
       rel: 'noopener noreferrer',
     },
     {
-      text: session ? 'Sign out' : 'Login / Signup',
-      href: session ? '' : '/login',
+      text: session ? 'Sign out' : '',
+      href: session ? '' : '',
       onClick: session ? () => signOut({ callbackUrl: '/' }) : undefined,
     },
   ];
@@ -92,92 +101,88 @@ const Header = () => {
   };
 
   return (
-    <header className='sticky top-0 px-10 py-2.5 flex flex-col w-full justify-between items-center gap-3 z-10'>
+    <header className='sticky top-0 flex flex-col py-2.5 gap-3 z-10 w-full justify-between items-center bg-day'>
       <div className='flex w-full bg-transparent items-center justify-between'>
         <Link href='/'>
-          <h1 className='header'>applaudify</h1>
+          <Image
+            src={logo}
+            alt='logo'
+            height={20}
+            width={35}
+          ></Image>
         </Link>
-        <div className='flex items-center gap-3'>
-          <div
-            className='header-nav'
-            onClick={toggleMenu}
-          >
-            Menu
-          </div>
-          <AnimatePresence>
-            {dropDown && (
-              <motion.div
-                variants={menuVariants}
-                initial='initial'
-                animate='animate'
-                exit='exit'
-                className='origin-top h-screen w-full fixed left-0 top-0 gap-40 px-10 py-4 z-10 bg-light'
-              >
-                <div className='flex h-full flex-col'>
-                  <div className='flex justify-between items-center pt-2'>
-                    <Link href='/'>
-                      <h1 className='header ombre-text'>applaudify</h1>
-                    </Link>
-                    <Image
-                      src={closeMenu}
-                      alt='close menu'
-                      width={30}
-                      height={30}
-                      onClick={toggleMenu}
-                    ></Image>
-                  </div>
-                  <motion.div
-                    variants={menuItemsContainerVariants}
-                    initial='initial'
-                    animate='open'
-                    exit='initial'
-                    className='flex flex-col h-full justify-center items-center gap-10'
-                  >
-                    {navLinks.map((link, index) => {
-                      return (
-                        <div
-                          className='overflow-hidden'
-                          key={index + link.text}
-                        >
-                          <motion.div
-                            variants={menuItemVariants}
-                            initial='initial'
-                            animate='open'
-                            exit='initial'
-                          >
-                            <Link
-                              href={link.href}
-                              rel={link.rel}
-                              target={link.target}
-                              onClick={link.onClick}
-                              className='sub-title'
-                            >
-                              {link.text}
-                            </Link>
-                          </motion.div>
-                        </div>
-                      );
-                    })}
-                  </motion.div>
+        <AnimatePresence>
+          {dropDown && (
+            <motion.div
+              variants={menuVariants}
+              initial='initial'
+              animate='animate'
+              exit='exit'
+              className='origin-top h-screen w-full fixed left-0 top-0 gap-40 px-10 py-4 z-10 bg-day'
+            >
+              <div className='flex h-full flex-col'>
+                <div className='flex justify-between items-center pt-2'>
+                  <Link href='/'>
+                    <h1 className='header ombre-text'>applaudify</h1>
+                  </Link>
+                  <Image
+                    src={closeMenu}
+                    alt='close menu'
+                    width={30}
+                    height={30}
+                    onClick={toggleMenu}
+                  ></Image>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {session ? (
-            <Link
-              href='/profile'
-              className='header-nav'
-            >
-              Profile
-            </Link>
-          ) : (
-            <Link
-              href='/login'
-              className='header-nav'
-            >
-              Login
-            </Link>
+                <motion.div
+                  variants={menuItemsContainerVariants}
+                  initial='initial'
+                  animate='open'
+                  exit='initial'
+                  className='flex flex-col h-full justify-center items-center gap-10'
+                >
+                  {navLinks.map((link, index) => {
+                    return (
+                      <div
+                        className='overflow-hidden'
+                        key={index + link.text}
+                      >
+                        <motion.div
+                          variants={menuItemVariants}
+                          initial='initial'
+                          animate='open'
+                          exit='initial'
+                        >
+                          <Link
+                            href={link.href}
+                            rel={link.rel}
+                            target={link.target}
+                            onClick={link.onClick}
+                            className='sub-title'
+                          >
+                            {link.text}
+                          </Link>
+                        </motion.div>
+                      </div>
+                    );
+                  })}
+                </motion.div>
+              </div>
+            </motion.div>
           )}
+        </AnimatePresence>
+        <div className='flex items-center gap-5'>
+          <Link
+            href='/login'
+            className='nav-5 tabletP:nav-4 underline hover:underline-offset-8'
+          >
+            Login
+          </Link>
+          <Image
+            src={menu}
+            alt='menu'
+            height={20}
+            onClick={toggleMenu}
+          ></Image>
         </div>
       </div>
     </header>
