@@ -125,7 +125,10 @@
       @apply tabletP:px-10 tabletP:py-10 tabletP:gap-20;
     }
     .section-layout {
-      @apply flex flex-col gap-40
+      @apply flex flex-col gap-40;
+    }
+    .drop-menu-inner-layout {
+      @apply flex flex-col h-1/2 justify-center items-center gap-10;
     }
   }
   @media screen and (orientation: landscape) {
@@ -134,6 +137,9 @@
       @apply tabletL:py-5 tabletL:gap-10;
       @apply laptopL:px-40 laptopL:py-10;
       @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40;
+    }
+    .drop-menu-inner-layout {
+      @apply flex flex-col h-3/4 justify-center items-center gap-6;
     }
   }
 }

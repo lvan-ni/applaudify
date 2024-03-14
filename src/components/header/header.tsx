@@ -4,9 +4,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import closeMenu from '@/assets/nav/close-menu.png';
 import logo from '@/assets/nav/logo-large.png';
-import menu from '@/assets/nav/menu-small.png';
+import menuSmall from '@/assets/nav/menu-small.png';
+import closeSmall from '@/assets/nav/close-small.png';
+import menuLarge from '@/assets/nav/menu-large.png';
+import closeLarge from '@/assets/nav/close-large.png';
 
 const Header = () => {
   const { data: session } = useSession();
@@ -102,13 +104,19 @@ const Header = () => {
 
   return (
     <header className='sticky top-0 flex flex-col py-2.5 gap-3 z-10 w-full justify-between items-center bg-day'>
-      <div className='flex w-full bg-transparent items-center justify-between'>
+      <div className='flex w-full items-center justify-between'>
         <Link href='/'>
           <Image
             src={logo}
             alt='logo'
             height={20}
-            width={35}
+            className='tabletP:hidden'
+          ></Image>
+          <Image
+            src={logo}
+            alt='logo'
+            height={30}
+            className='phoneSEP:hidden tabletP:block'
           ></Image>
         </Link>
         <AnimatePresence>
@@ -118,19 +126,37 @@ const Header = () => {
               initial='initial'
               animate='animate'
               exit='exit'
-              className='origin-top h-screen w-full fixed left-0 top-0 gap-40 px-10 py-4 z-10 bg-day'
+              className='fixed origin-top h-screen w-full left-0 top-0 gap-40 px-5 phoneL:px-10 py-4 z-10 bg-day'
             >
               <div className='flex h-full flex-col'>
-                <div className='flex justify-between items-center pt-2'>
+                <div className='flex justify-between items-center py-2.5'>
                   <Link href='/'>
-                    <h1 className='header ombre-text'>applaudify</h1>
+                    <Image
+                      src={logo}
+                      alt='logo'
+                      height={20}
+                      className='tabletP:hidden'
+                    ></Image>
+                    <Image
+                      src={logo}
+                      alt='logo'
+                      height={30}
+                      className='phoneSEP:hidden tabletP:block'
+                    ></Image>
                   </Link>
                   <Image
-                    src={closeMenu}
+                    src={closeSmall}
                     alt='close menu'
-                    width={30}
-                    height={30}
+                    height={34}
                     onClick={toggleMenu}
+                    className='tabletP:hidden'
+                  ></Image>
+                  <Image
+                    src={closeLarge}
+                    alt='close menu'
+                    height={42}
+                    onClick={toggleMenu}
+                    className='phoneSEP:hidden tabletP:block'
                   ></Image>
                 </div>
                 <motion.div
@@ -138,7 +164,7 @@ const Header = () => {
                   initial='initial'
                   animate='open'
                   exit='initial'
-                  className='flex flex-col h-full justify-center items-center gap-10'
+                  className='drop-menu-inner-layout'
                 >
                   {navLinks.map((link, index) => {
                     return (
@@ -157,7 +183,7 @@ const Header = () => {
                             rel={link.rel}
                             target={link.target}
                             onClick={link.onClick}
-                            className='sub-title'
+                            className='nav-5 tabletP:nav-4'
                           >
                             {link.text}
                           </Link>
@@ -178,10 +204,18 @@ const Header = () => {
             Login
           </Link>
           <Image
-            src={menu}
+            src={menuSmall}
             alt='menu'
-            height={20}
+            width={34}
             onClick={toggleMenu}
+            className='tabletP:hidden'
+          ></Image>
+          <Image
+            src={menuLarge}
+            alt='menu'
+            width={42}
+            onClick={toggleMenu}
+            className='phoneSEP:hidden tabletP:block'
           ></Image>
         </div>
       </div>
