@@ -31,6 +31,9 @@
     @apply font-josefin font-bold text-60;
   }
   .title-5 {
+    @apply font-josefin font-bold text-50;
+  }
+  .title-6 {
     @apply font-josefin font-bold text-40;
   }
   /* Nav */
@@ -44,10 +47,16 @@
     @apply font-avenir font-black text-20;
   }
   .nav-4 {
-    @apply font-josefin font-bold text-30;
+    @apply font-avenir font-black text-16;
   }
   .nav-5 {
+    @apply font-josefin font-bold text-30;
+  }
+  .nav-6 {
     @apply font-josefin font-bold text-20;
+  }
+  .nav-7 {
+    @apply font-josefin font-bold text-18;
   }
   /* Button */
   .button-1 {
@@ -64,9 +73,12 @@
     @apply font-josefin font-normal text-24;
   }
   .body-3 {
-    @apply font-avenir font-semibold text-22;
+    @apply font-josefin font-normal text-20;
   }
   .body-4 {
+    @apply font-avenir font-semibold text-22;
+  }
+  .body-5 {
     @apply font-avenir font-semibold text-18;
   }
   /* Name */
@@ -133,9 +145,8 @@
   }
   @media screen and (orientation: landscape) {
     .page-layout {
-      @apply flex flex-col items-center px-10 py-2.5 gap-5;
-      @apply tabletL:py-5 tabletL:gap-10;
-      @apply laptopL:px-40 laptopL:py-10;
+      @apply flex flex-col items-center px-10 py-5 phoneSEL:gap-10 phoneL:gap-20;
+      @apply laptopL:px-40 laptopL:py-10 laptopL:gap-20;
       @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40;
     }
     .drop-menu-inner-layout {

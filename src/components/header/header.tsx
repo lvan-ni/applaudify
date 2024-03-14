@@ -6,8 +6,8 @@ import { useSession, signOut } from 'next-auth/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '@/assets/nav/logo-large.png';
 import menuSmall from '@/assets/nav/menu-small.png';
-import closeSmall from '@/assets/nav/close-small.png';
 import menuLarge from '@/assets/nav/menu-large.png';
+import closeSmall from '@/assets/nav/close-small.png';
 import closeLarge from '@/assets/nav/close-large.png';
 
 const Header = () => {
@@ -183,7 +183,7 @@ const Header = () => {
                             rel={link.rel}
                             target={link.target}
                             onClick={link.onClick}
-                            className='nav-5 tabletP:nav-4'
+                            className='nav-6 tabletP:nav-5'
                           >
                             {link.text}
                           </Link>
@@ -199,7 +199,7 @@ const Header = () => {
         <div className='flex items-center gap-5'>
           <Link
             href='/login'
-            className='nav-5 tabletP:nav-4 underline hover:underline-offset-8'
+            className='nav-7 phoneP:nav-6 tabletP:nav-5 underline hover:underline-offset-8'
           >
             Login
           </Link>

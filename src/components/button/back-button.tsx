@@ -2,7 +2,8 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import back from '@/assets/nav/back.png';
+import backSmall from '@/assets/nav/back-small.png';
+import backLarge from '@/assets/nav/back-large.png';
 
 const BackButton = () => {
   const router = useRouter();
@@ -13,13 +14,19 @@ const BackButton = () => {
   return (
     <button
       onClick={goBack}
-      className='cursor-pointer'
+      className='cursor-pointer flex py-2.5'
     >
       <Image
-        src={back}
+        src={backLarge}
         alt='back'
-        width={30}
-        height={30}
+        width={26}
+        className='tabletP:hidden'
+      ></Image>
+      <Image
+        src={backSmall}
+        alt='back'
+        width={32}
+        className='phoneSEP:hidden tabletP:block'
       ></Image>
     </button>
   );
