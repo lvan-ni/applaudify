@@ -5,237 +5,119 @@
 @tailwind utilities;
 
 @layer components {
-  /* ------ LAYOUT ------ */
+  /* ------------ TYPOGRAPHY ------------ */
+  /* Title */
+  .title-1 {
+    @apply font-josefin font-bold text-140;
+  }
+  .title-2 {
+    @apply font-josefin font-bold text-100;
+  }
+  .title-3 {
+    @apply font-josefin font-bold text-80;
+  }
+  .title-4 {
+    @apply font-josefin font-bold text-60;
+  }
+  .title-5 {
+    @apply font-josefin font-bold text-40;
+  }
+  /* Nav */
+  .nav-1 {
+    @apply font-avenir font-black text-30;
+  }
+  .nav-2 {
+    @apply font-avenir font-black text-24;
+  }
+  .nav-3 {
+    @apply font-avenir font-black text-20;
+  }
+  .nav-4 {
+    @apply font-josefin font-bold text-30;
+  }
+  .nav-5 {
+    @apply font-josefin font-bold text-20;
+  }
+  /* Button */
+  .button-1 {
+    @apply font-avenir font-black text-18;
+  }
+  .button-2 {
+    @apply font-avenir font-black text-14;
+  }
+  /* Body */
+  .body-1 {
+    @apply font-josefin font-normal text-30;
+  }
+  .body-2 {
+    @apply font-josefin font-normal text-24;
+  }
+  .body-3 {
+    @apply font-avenir font-semibold text-22;
+  }
+  .body-4 {
+    @apply font-avenir font-semibold text-18;
+  }
+  /* Name */
+  .name-1 {
+    @apply font-josefin font-bold text-24;
+  }
+  .name-2 {
+    @apply font-josefin font-bold text-20;
+  }
+  .name-3 {
+    @apply font-josefin font-bold text-18;
+  }
+  .name-4 {
+    @apply font-josefin font-bold text-16;
+  }
+  .name-5 {
+    @apply font-josefin font-bold text-14;
+  }
+  .name-6 {
+    @apply font-josefin font-bold text-12;
+  }
+  /* Desc */
+  .desc-1 {
+    @apply font-avenir font-semibold text-20;
+  }
+  .desc-2 {
+    @apply font-avenir font-semibold text-16;
+  }
+  .desc-3 {
+    @apply font-avenir font-semibold text-14;
+  }
+  .desc-4 {
+    @apply font-avenir font-semibold text-10;
+  }
+  /* Info */
+  .info-1 {
+    @apply font-avenir font-medium text-16;
+  }
+  .info-2 {
+    @apply font-avenir font-medium text-14;
+  }
+  .info-3 {
+    @apply font-avenir font-medium text-12;
+  }
+  .info-4 {
+    @apply font-avenir font-medium text-10;
+  }
 
-  /* ------ CARD ------ */
-  .applaud-card {
-    @apply flex flex-col items-center justify-center p-4 mb-8 gap-5 border-solid border border-silver/50 bg-white rounded-3xl;
+  /* ------------ LAYOUT ------------ */
+  /* ------ PAGE ------ */
+  @media screen and (orientation: portrait){
+    .page {
+      @apply flex flex-col px-5 pt-5 pb-10 gap-10
+      @apply tabletP:px-10 tabletP:py-10 tabletP:gap-20
+    }
   }
-  .sender-layout {
-    @apply flex items-center gap-2 px-3.5 pt-2;
-  }
-  .sender-layout-lg {
-    @apply flex items-center gap-4 px-3.5 pt-4;
-  }
-  .receiver-layout {
-    @apply flex flex-col w-full items-center justify-center p-2.5 gap-2.5 border-b border-silver/50;
-  }
-  .receiver-spacing {
-    @apply;
-  }
-  .profile-img {
-    @apply rounded-full;
-  }
-
-  /* ------ TEXT ------ */
-  .header-nav {
-    @apply font-avenir text-16 font-500 capitalize cursor-pointer;
-  }
-  .title-logo {
-    @apply font-josefin text-60 font-700 lowercase;
-  }
-  .header-logo {
-    @apply font-josefin text-24 font-700 lowercase;
-  }
-  .sub-title {
-    @apply font-avenir text-30 font-500;
-  }
-  .sub-header {
-    @apply font-avenir text-16 font-500 lowercase;
-  }
-  .header {
-    @apply font-josefin text-30 font-700 lowercase;
-  }
-  .small-header {
-    @apply font-josefin text-24 font-500 lowercase;
-  }
-  .body-large {
-    @apply font-josefin text-20 font-700;
-  }
-  .body-main {
-    @apply font-avenir text-16 font-500;
-  }
-  .body-small {
-    @apply font-avenir text-14 font-500;
-  }
-  .body-skill {
-    @apply font-josefin text-14 font-400;
-  }
-  .button {
-    @apply font-josefin text-16 font-400;
-  }
-  .sender {
-    @apply font-josefin text-12 font-600 capitalize;
-  }
-  .sender-lg {
-    @apply font-josefin text-14 font-600 capitalize;
-  }
-  .sender-info {
-    @apply font-avenir text-10 font-500 text-stone;
-  }
-  .sender-info-lg {
-    @apply font-avenir text-12 font-500 text-stone;
-  }
-  .send-date {
-    @apply font-avenir text-10 font-500 text-stone;
-  }
-  .send-date-lg {
-    @apply font-avenir text-12 font-500 text-stone;
-  }
-  .receiver-name {
-    @apply font-josefin text-16 font-600 capitalize;
-  }
-  .receiver-info {
-    @apply font-avenir text-12 font-500 text-charcoal;
-  }
-  .small {
-    @apply font-avenir text-10 font-500;
-  }
-
-  /* ------ BUTTON ------ */
-  .header-btn {
-    @apply flex items-center border-solid border border-silver/50 rounded-3xl px-2.5 py-1 h-8 bg-white;
-  }
-  .start-btn {
-    @apply flex items-center justify-center w-full border-solid border border-silver/50 rounded-3xl p-2.5 bg-white;
-  }
-  .login-btn {
-    @apply flex items-center justify-around w-full border-solid border border-silver rounded-3xl px-5 py-2.5 bg-white;
-  }
-  .search-btn {
-    @apply flex items-center justify-center border-solid border border-light rounded-3xl px-2.5 py-1 h-8 bg-white;
-  }
-  .btn {
-    @apply flex items-center justify-center w-2/3 border-solid border border-silver rounded-3xl px-2.5 py-1 h-10 bg-white;
-  }
-  .skill-btn {
-    @apply flex items-center border-solid border border-silver rounded-3xl px-2.5 py-1 h-8 body-skill;
-  }
-  .ombre-text {
-    @apply bg-transparent;
+@media screen and (orientation: landscape) {
+  .page {
+    @apply flex flex-col px-10 py-2.5 gap-5
+    @apply tabletL:py-5 tabletL:gap-10
+    @apply laptopL:px-40 laptopL:py-10
+    @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40
   }
 }
-
-:root {
-  /* core colors */
-  --core-black: #000000;
-  --core-metal: #0d0d0d;
-  --core-charcoal: #303030;
-  --core-stone: #5a5a5a;
-  --core-gray: #919191;
-  --core-hdrln: rgba(178, 178, 178, 0.856);
-  --core-hdr: #f6f6f67a;
-  --core-silver: #b8b8b8;
-  --core-light: #f6f6f6;
-  --core-paper: #f8f6f2;
-  --core-white: #ffffff;
-  --core-border: linear-gradient(
-    125deg,
-    #3db3e2 16.46%,
-    #9ed7f3 36.98%,
-    #d7bdf5 51.69%,
-    #cc81f1 60.85%,
-    #e96069 71.67%,
-    #f09674 91.21%
-  );
-  --core-logo: linear-gradient(
-    125deg,
-    #68d0f9 16.46%,
-    #9ed7f3 36.98%,
-    #d7bdf5 51.69%,
-    #cc81f1 60.85%,
-    #e96069 68.76%,
-    #f09674 91.21%
-  );
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  /* color: var(--core-metal); */
-}
-
-body {
-  background-color: var(--core-light);
-}
-
-.counter-border {
-  position: relative;
-  border-radius: 30px;
-  padding: 1.5px;
-  background-image: var(--core-logo);
-}
-
-.counter {
-  background: var(--core-white);
-  padding: 1px 6px;
-  border-radius: 30px;
-  text-align: center;
-}
-
-.applaud-card-container {
-  border-radius: 24px;
-  padding: 2px;
-  background-image: var(--core-logo);
-}
-
-.applaud-card-ombre {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  gap: 20px;
-  border-radius: 24px;
-  background: var(--core-white);
-}
-
-.profile-button {
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.profile-button::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.profile-button::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  transition: all 0.3s;
-  border-radius: 10rem;
-  z-index: -1;
-  background-color: var(--core-white);
-}
-
-.profile-button.clicked {
-  color: var(--core-white);
-  background-color: black;
-}
-
-/* .profile-button.clicked::before {
-  width: 100%;
-  background-color: black;
-} */
-
-.header-background {
-  background-color: gray, 0.5;
-}
-
-.logo-ombre {
-  fill: #f09674;
 }
