@@ -146,7 +146,7 @@
   }
   .text {
     @apply body-4 phoneP:body-3;
-    @apply tabletP:body-2;
+    @apply tabletP:body-2 tabletL:body-1;
   }
   .cta {
     @apply nav-3 phoneP:nav-2 underline underline-offset-8;
