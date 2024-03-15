@@ -135,27 +135,27 @@ const Header = () => {
                       <Image
                         src={logo}
                         alt='logo'
-                        height={20}
-                        className='tabletP:hidden'
+                        height={22}
+                        className='laptopL:hidden'
                       ></Image>
                       <Image
                         src={logo}
                         alt='logo'
                         height={30}
-                        className='phoneSEP:hidden tabletP:block'
+                        className='hidden laptopL:block'
                       ></Image>
                     </Link>
                     <Image
                       src={closeSmall}
                       alt='close menu'
-                      height={34}
+                      height={30}
                       onClick={toggleMenu}
                       className='tabletP:hidden'
                     ></Image>
                     <Image
                       src={closeLarge}
                       alt='close menu'
-                      height={42}
+                      height={32}
                       onClick={toggleMenu}
                       className='phoneSEP:hidden tabletP:block'
                     ></Image>
@@ -263,14 +263,14 @@ const Header = () => {
           <Image
             src={menuSmall}
             alt='menu'
-            width={34}
+            width={30}
             onClick={toggleMenu}
             className='tabletP:hidden tabletL:hidden'
           ></Image>
           <Image
             src={menuLarge}
             alt='menu'
-            width={42}
+            width={40}
             onClick={toggleMenu}
             className='hidden tabletP:block tabletL:hidden'
           ></Image>
