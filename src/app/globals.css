@@ -53,7 +53,7 @@
     @apply font-josefin font-bold text-30;
   }
   .nav-6 {
-    @apply font-josefin font-bold text-20;
+    @apply font-josefin font-bold text-24;
   }
   .nav-7 {
     @apply font-josefin font-bold text-18;
@@ -153,6 +153,14 @@
     @apply tabletP:nav-1;
   }
 
+  /* ------ Universal ------ */
+  .title {
+    @apply title-5;
+    @apply phoneP:title-4 phoneL:title-3;
+    @apply tabletL:title-2;
+    @apply laptopL:title-1;
+  }
+
   /* ------------ LAYOUT ------------ */
   @media screen and (orientation: portrait) {
     .page-layout {
@@ -162,22 +170,55 @@
     .section-layout {
       @apply flex flex-col self-start gap-40;
     }
+    .drop-menu-layout {
+      @apply fixed origin-top h-screen w-full left-0 top-0 gap-40 px-5 py-2.5 z-10 bg-day;
+      @apply tabletP:px-10 tabletP:py-10;
+    }
     .drop-menu-inner-layout {
-      @apply flex flex-col h-1/2 justify-center items-center gap-10;
+      @apply flex flex-col h-screen justify-center items-center gap-10;
+    }
+    .navlink-container {
+      @apply flex flex-col justify-center items-center gap-10 flex-grow;
+    }
+    .logout-container {
+      @apply flex flex-col w-full gap-5;
+      @apply phoneP:gap-10;
+    }
+    .menu-nav {
+      @apply nav-7;
+      @apply phoneP:nav-6;
     }
   }
   @media screen and (orientation: landscape) {
     .page-layout {
-      @apply flex flex-col items-center px-10 py-5 phoneSEL:gap-10 phoneL:gap-20;
+      @apply flex flex-col items-center px-10 py-5 gap-5;
+      @apply phoneL:gap-10;
       @apply laptopL:px-40 laptopL:py-10 laptopL:gap-20;
       @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40;
     }
     .section-layout {
-      @apply flex flex-col self-start gap-10;
+      @apply flex flex-col self-start gap-2;
       @apply tabletL:gap-40;
     }
+    .drop-menu-layout {
+      @apply fixed origin-top h-screen w-full left-0 top-0 gap-40 px-10 py-2.5 z-10 bg-day;
+      @apply laptopL:px-40 laptopL:py-10;
+      @apply desktopL:px-96 desktopL:py-16;
+    }
     .drop-menu-inner-layout {
-      @apply flex flex-col h-3/4 justify-center items-center gap-6;
+      @apply flex flex-col h-screen justify-center items-center gap-6;
+    }
+    .navlink-container {
+      @apply flex flex-col justify-center items-center gap-2.5 flex-grow;
+      @apply phoneL:gap-2;
+    }
+    .logout-container {
+      @apply flex flex-col w-full gap-2.5;
+      @apply phoneL:gap-10;
+    }
+    .menu-nav {
+      @apply nav-7;
+      @apply phoneL:nav-6;
     }
   }
 }

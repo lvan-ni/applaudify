@@ -33,8 +33,8 @@ const config: Config = {
         // iPhone SE Portrait
         phoneSEP: '320px',
 
-        // iPhone 14/15 Pro Portrait
-        phoneP: '393px',
+        // iPhone 13/14 Portrait
+        phoneP: '390px',
 
         // iPhone SE Landscape
         phoneSEL: '568px',
@@ -42,8 +42,8 @@ const config: Config = {
         // iPad Pro 11" Portrait
         tabletP: '834px',
 
-        // iPhone 14/15 Pro Landscape
-        phoneL: '852px',
+        // iPhone 13/14 Landscape
+        phoneL: '844px',
 
         // iPad Pro 11" Landscape
         tabletL: '1194px',

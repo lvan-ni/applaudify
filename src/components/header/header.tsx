@@ -19,31 +19,31 @@ const Header = () => {
 
   const navLinks = [
     {
-      text: session ? 'Inbox' : '',
-      href: '/inbox',
-    },
-    {
       text: session ? 'Profile' : '',
       href: '/profile',
+      className: 'tabletP:hidden',
     },
     {
-      text: session ? 'Learn' : '',
-      href: '/landing',
+      text: session ? 'Inbox' : '',
+      href: '/inbox',
+      className: 'tabletP:hidden',
     },
     {
       text: 'About',
       href: '/about',
+      className: '',
+    },
+    {
+      text: session ? 'Learn' : '',
+      href: '/landing',
+      className: '',
     },
     {
       text: 'GitHub',
       href: 'https://github.com/lvan-ni/applaudify',
       target: '_blank',
       rel: 'noopener noreferrer',
-    },
-    {
-      text: session ? 'Sign out' : '',
-      href: session ? '' : '',
-      onClick: session ? () => signOut({ callbackUrl: '/' }) : undefined,
+      className: '',
     },
   ];
 
@@ -104,7 +104,7 @@ const Header = () => {
 
   return (
     <header className='sticky top-0 flex flex-col py-2.5 gap-3 z-10 w-full justify-between items-center bg-day'>
-      <div className='flex w-full items-center justify-between'>
+      <div className='flex w-full items-center justify-between gap-5 tabletP:gap-10 menu-nav'>
         <Link href='/'>
           <Image
             src={logo}
@@ -116,108 +116,161 @@ const Header = () => {
             src={logo}
             alt='logo'
             height={30}
-            className='phoneSEP:hidden tabletP:block'
+            className='hidden tabletP:block'
           ></Image>
         </Link>
-        <AnimatePresence>
-          {dropDown && (
-            <motion.div
-              variants={menuVariants}
-              initial='initial'
-              animate='animate'
-              exit='exit'
-              className='fixed origin-top h-screen w-full left-0 top-0 gap-40 px-5 phoneL:px-10 py-4 z-10 bg-day'
-            >
-              <div className='flex h-full flex-col'>
-                <div className='flex justify-between items-center py-2.5'>
-                  <Link href='/'>
+        <div className='tabletL:hidden'>
+          <AnimatePresence>
+            {dropDown && (
+              <motion.div
+                variants={menuVariants}
+                initial='initial'
+                animate='animate'
+                exit='exit'
+                className='drop-menu-layout'
+              >
+                <div className='flex h-full flex-col'>
+                  <div className='flex justify-between items-center py-2.5'>
+                    <Link href='/'>
+                      <Image
+                        src={logo}
+                        alt='logo'
+                        height={20}
+                        className='tabletP:hidden'
+                      ></Image>
+                      <Image
+                        src={logo}
+                        alt='logo'
+                        height={30}
+                        className='phoneSEP:hidden tabletP:block'
+                      ></Image>
+                    </Link>
                     <Image
-                      src={logo}
-                      alt='logo'
-                      height={20}
+                      src={closeSmall}
+                      alt='close menu'
+                      height={34}
+                      onClick={toggleMenu}
                       className='tabletP:hidden'
                     ></Image>
                     <Image
-                      src={logo}
-                      alt='logo'
-                      height={30}
+                      src={closeLarge}
+                      alt='close menu'
+                      height={42}
+                      onClick={toggleMenu}
                       className='phoneSEP:hidden tabletP:block'
                     ></Image>
-                  </Link>
-                  <Image
-                    src={closeSmall}
-                    alt='close menu'
-                    height={34}
-                    onClick={toggleMenu}
-                    className='tabletP:hidden'
-                  ></Image>
-                  <Image
-                    src={closeLarge}
-                    alt='close menu'
-                    height={42}
-                    onClick={toggleMenu}
-                    className='phoneSEP:hidden tabletP:block'
-                  ></Image>
-                </div>
-                <motion.div
-                  variants={menuItemsContainerVariants}
-                  initial='initial'
-                  animate='open'
-                  exit='initial'
-                  className='drop-menu-inner-layout'
-                >
-                  {navLinks.map((link, index) => {
-                    return (
-                      <div
-                        className='overflow-hidden'
-                        key={index + link.text}
-                      >
-                        <motion.div
-                          variants={menuItemVariants}
-                          initial='initial'
-                          animate='open'
-                          exit='initial'
-                        >
-                          <Link
-                            href={link.href}
-                            rel={link.rel}
-                            target={link.target}
-                            onClick={link.onClick}
-                            className='nav-6 tabletP:nav-5'
+                  </div>
+                  <motion.div
+                    variants={menuItemsContainerVariants}
+                    initial='initial'
+                    animate='open'
+                    exit='initial'
+                    className='drop-menu-inner-layout'
+                  >
+                    <div className='navlink-container'>
+                      {navLinks.map((link, index) => {
+                        return (
+                          <div
+                            className='overflow-hidden'
+                            key={index + link.text}
                           >
-                            {link.text}
-                          </Link>
-                        </motion.div>
-                      </div>
-                    );
-                  })}
-                </motion.div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        <div className='flex items-center gap-5'>
+                            <motion.div
+                              variants={menuItemVariants}
+                              initial='initial'
+                              animate='open'
+                              exit='initial'
+                            >
+                              <Link
+                                href={link.href}
+                                rel={link.rel}
+                                target={link.target}
+                                className={`${link.className} menu-nav`}
+                              >
+                                {link.text}
+                              </Link>
+                            </motion.div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className='logout-container'>
+                      <hr className='h-1 bg-sunrise' />
+                      <button
+                        onClick={() => signOut({ callbackUrl: '/' })}
+                        className='menu-nav underline hover:underline-offset-8 flex self-start'
+                      >
+                        Log out
+                      </button>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        {session ? (
+          <>
+            <Link
+              href='/profile'
+              className='hidden tabletP:block'
+            >
+              Profile
+            </Link>
+            <Link
+              href='/inbox'
+              className='hidden tabletP:block'
+            >
+              Inbox
+            </Link>
+            <Link
+              href='/about'
+              className='hidden tabletL:block'
+            >
+              About
+            </Link>
+            <Link
+              href='/landing'
+              className='hidden tabletL:block'
+            >
+              Learn
+            </Link>
+            <Link
+              href='https://github.com/lvan-ni/applaudify'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='hidden tabletL:block'
+            >
+              GitHub
+            </Link>
+            <button
+              onClick={() => signOut({ callbackUrl: '/' })}
+              className='hidden tabletL:block underline hover:underline-offset-8'
+            >
+              Log out
+            </button>
+          </>
+        ) : (
           <Link
             href='/login'
-            className='nav-7 phoneP:nav-6 tabletP:nav-5 underline hover:underline-offset-8'
+            className='menu-nav underline hover:underline-offset-8'
           >
             Login
           </Link>
-          <Image
-            src={menuSmall}
-            alt='menu'
-            width={34}
-            onClick={toggleMenu}
-            className='tabletP:hidden'
-          ></Image>
-          <Image
-            src={menuLarge}
-            alt='menu'
-            width={42}
-            onClick={toggleMenu}
-            className='phoneSEP:hidden tabletP:block'
-          ></Image>
-        </div>
+        )}
+        <Image
+          src={menuSmall}
+          alt='menu'
+          width={34}
+          onClick={toggleMenu}
+          className='tabletP:hidden tabletL:hidden'
+        ></Image>
+        <Image
+          src={menuLarge}
+          alt='menu'
+          width={42}
+          onClick={toggleMenu}
+          className='hidden tabletP:block tabletL:hidden'
+        ></Image>
       </div>
     </header>
   );
