@@ -30,7 +30,6 @@ const config: Config = {
         '140': '140px',
       },
       screens: {
-        // default 640px
         // iPhone SE Portrait
         phoneSEP: '320px',
 
@@ -47,7 +46,7 @@ const config: Config = {
         phoneL: '852px',
 
         // iPad Pro 11" Landscape
-        tabletL: '1194',
+        tabletL: '1194px',
 
         // MacBook Pro 14" Landscape
         laptopL: '1512px',

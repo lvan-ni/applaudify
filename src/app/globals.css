@@ -76,10 +76,7 @@
     @apply font-josefin font-normal text-20;
   }
   .body-4 {
-    @apply font-avenir font-semibold text-22;
-  }
-  .body-5 {
-    @apply font-avenir font-semibold text-18;
+    @apply font-josefin font-normal text-16;
   }
   /* Name */
   .sub-heading-1 {
@@ -113,6 +110,13 @@
   .desc-4 {
     @apply font-avenir font-semibold text-10;
   }
+  /* Content */
+  .content-1 {
+    @apply font-avenir font-semibold text-22;
+  }
+  .content-2 {
+    @apply font-avenir font-semibold text-18;
+  }
   /* Info */
   .info-1 {
     @apply font-avenir font-medium text-16;
@@ -127,10 +131,29 @@
     @apply font-avenir font-medium text-10;
   }
 
-  /* ------ Landing ------ */
+  /* ------ Landing Page ------ */
+  .title-text {
+    @apply body-3 phoneP:body-2;
+    @apply tabletP:body-1;
+  }
+  .sub-heading {
+    @apply sub-heading-4;
+    @apply tabletP:sub-heading-2 tabletL:sub-heading-1;
+  }
+  .heading {
+    @apply title-6 phoneP:title-5;
+    @apply tabletP:title-4 tabletL:title-3;
+  }
+  .text {
+    @apply body-4 phoneP:body-3;
+    @apply tabletP:body-2;
+  }
+  .cta {
+    @apply nav-3 phoneP:nav-2 underline underline-offset-8;
+    @apply tabletP:nav-1;
+  }
 
   /* ------------ LAYOUT ------------ */
-  /* ------ PAGE ------ */
   @media screen and (orientation: portrait) {
     .page-layout {
       @apply flex flex-col items-center px-5 pt-5 pb-10 gap-10;
@@ -145,9 +168,13 @@
   }
   @media screen and (orientation: landscape) {
     .page-layout {
-      @apply flex flex-col items-center px-10 py-5 phoneSEL:gap-10 phoneL:gap-20;
+      @apply flex flex-col px-10 py-5 phoneSEL:gap-10 phoneL:gap-20;
       @apply laptopL:px-40 laptopL:py-10 laptopL:gap-20;
       @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40;
+    }
+    .section-layout {
+      @apply flex flex-col gap-10;
+      @apply tabletL:gap-40;
     }
     .drop-menu-inner-layout {
       @apply flex flex-col h-3/4 justify-center items-center gap-6;

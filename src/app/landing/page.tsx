@@ -31,17 +31,17 @@ const Landing = () => {
     <div className='page-layout'>
       <Header />
       <section className='section-layout'>
-        <div className='title-5 phoneP:title-4 tabletP:title-3 tabletL:title-1 phoneSEL:hidden'>
+        <div className='phoneSEL:hidden title-5 phoneP:title-4'>
           <h1>archive.</h1>
           <h1>applaud.</h1>
           <h1>applaudify.</h1>
         </div>
-        <div className='title-4 tabletP:title-3 tabletL:title-1 hidden phoneSEL:block'>
+        <div className='hidden phoneSEL:block title-4 phoneL:title-3 tabletP:title-3 tabletL:title-2 laptopL:title-1'>
           <h1>archive.applaud.</h1>
           <h1>applaudify.</h1>
         </div>
         <div className='flex flex-col gap-4'>
-          <p className='body-3 phoneP:body-2 tabletP:body-1'>
+          <p className='title-text'>
             Collect, manage, and showcase your professional testimonials - every
             applaud matters.
           </p>
@@ -53,36 +53,28 @@ const Landing = () => {
           </Link>
         </div>
       </section>
-      <div className='flex flex-col gap-20 tabletL:gap-40'>
-        {contentCopy.map((copy, index) => {
-          return (
-            <section
-              key={index + copy.text}
-              className='section-layout'
-            >
-              <div>
-                <h5 className='sub-heading-3 tabletP:sub-heading-2'>
-                  {copy.subHeading}
-                </h5>
-                <h1 className='title-5 phoneP:title-4 tabletP:title-3 tabletL:title-2'>
-                  {copy.heading}
-                </h1>
-              </div>
-              <div>
-                <p className='body-3 phoneP:body-2 tabletP:body-1'>
-                  {copy.text}
-                </p>
-                <Link
-                  className='nav-3 phoneP:nav-2 tabletP:nav-1 underline underline-offset-8'
-                  href={copy.href}
-                >
-                  {copy.link}
-                </Link>
-              </div>
-            </section>
-          );
-        })}
-      </div>
+      {contentCopy.map((copy, index) => {
+        return (
+          <section
+            key={index + copy.text}
+            className='section-layout'
+          >
+            <div>
+              <h5 className='sub-heading'>{copy.subHeading}</h5>
+              <h1 className='heading'>{copy.heading}</h1>
+            </div>
+            <div className='flex flex-col gap-4'>
+              <p className='text'>{copy.text}</p>
+              <Link
+                className='cta'
+                href={copy.href}
+              >
+                {copy.link}
+              </Link>
+            </div>
+          </section>
+        );
+      })}
       <footer className='pt-20'>
         <p className='info-3 tabletL:info-2 desktopL:info-1'>
           © 2023-2024 applaudify
