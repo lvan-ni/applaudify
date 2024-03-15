@@ -160,7 +160,7 @@
       @apply tabletP:px-10 tabletP:py-10 tabletP:gap-20;
     }
     .section-layout {
-      @apply flex flex-col gap-40;
+      @apply flex flex-col self-start gap-40;
     }
     .drop-menu-inner-layout {
       @apply flex flex-col h-1/2 justify-center items-center gap-10;
@@ -168,12 +168,12 @@
   }
   @media screen and (orientation: landscape) {
     .page-layout {
-      @apply flex flex-col px-10 py-5 phoneSEL:gap-10 phoneL:gap-20;
+      @apply flex flex-col items-center px-10 py-5 phoneSEL:gap-10 phoneL:gap-20;
       @apply laptopL:px-40 laptopL:py-10 laptopL:gap-20;
       @apply desktopL:px-96 desktopL:py-16 desktopL:gap-40;
     }
     .section-layout {
-      @apply flex flex-col gap-10;
+      @apply flex flex-col self-start gap-10;
       @apply tabletL:gap-40;
     }
     .drop-menu-inner-layout {
