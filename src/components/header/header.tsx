@@ -109,14 +109,14 @@ const Header = () => {
           <Image
             src={logo}
             alt='logo'
-            height={20}
-            className='tabletP:hidden'
+            height={22}
+            className='tabletL:hidden'
           ></Image>
           <Image
             src={logo}
             alt='logo'
             height={30}
-            className='hidden tabletP:block'
+            className='hidden tabletL:block'
           ></Image>
         </Link>
         <div className='tabletL:hidden'>
@@ -193,84 +193,88 @@ const Header = () => {
                         );
                       })}
                     </div>
-                    <div className='logout-container'>
-                      <hr className='h-1 bg-sunrise' />
-                      <button
-                        onClick={() => signOut({ callbackUrl: '/' })}
-                        className='menu-nav underline hover:underline-offset-8 flex self-start'
-                      >
-                        Log out
-                      </button>
-                    </div>
+                    {session ? (
+                      <div className='logout-container'>
+                        <hr className='h-1 bg-sunrise' />
+                        <button
+                          onClick={() => signOut({ callbackUrl: '/' })}
+                          className='menu-nav underline hover:underline-offset-8 flex self-start'
+                        >
+                          Log out
+                        </button>
+                      </div>
+                    ) : null}
                   </motion.div>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-        {session ? (
-          <>
+        <div className='menu-nav-container'>
+          {session ? (
+            <>
+              <Link
+                href='/profile'
+                className='hidden tabletP:block'
+              >
+                Profile
+              </Link>
+              <Link
+                href='/inbox'
+                className='hidden tabletP:block'
+              >
+                Inbox
+              </Link>
+              <Link
+                href='/about'
+                className='hidden tabletL:block'
+              >
+                About
+              </Link>
+              <Link
+                href='/landing'
+                className='hidden tabletL:block'
+              >
+                Learn
+              </Link>
+              <Link
+                href='https://github.com/lvan-ni/applaudify'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='hidden tabletL:block'
+              >
+                GitHub
+              </Link>
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className='hidden tabletL:block underline hover:underline-offset-8'
+              >
+                Log out
+              </button>
+            </>
+          ) : (
             <Link
-              href='/profile'
-              className='hidden tabletP:block'
+              href='/login'
+              className='menu-nav underline hover:underline-offset-8'
             >
-              Profile
+              Login
             </Link>
-            <Link
-              href='/inbox'
-              className='hidden tabletP:block'
-            >
-              Inbox
-            </Link>
-            <Link
-              href='/about'
-              className='hidden tabletL:block'
-            >
-              About
-            </Link>
-            <Link
-              href='/landing'
-              className='hidden tabletL:block'
-            >
-              Learn
-            </Link>
-            <Link
-              href='https://github.com/lvan-ni/applaudify'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='hidden tabletL:block'
-            >
-              GitHub
-            </Link>
-            <button
-              onClick={() => signOut({ callbackUrl: '/' })}
-              className='hidden tabletL:block underline hover:underline-offset-8'
-            >
-              Log out
-            </button>
-          </>
-        ) : (
-          <Link
-            href='/login'
-            className='menu-nav underline hover:underline-offset-8'
-          >
-            Login
-          </Link>
-        )}
-        <Image
-          src={menuSmall}
-          alt='menu'
-          width={34}
-          onClick={toggleMenu}
-          className='tabletP:hidden tabletL:hidden'
-        ></Image>
-        <Image
-          src={menuLarge}
-          alt='menu'
-          width={42}
-          onClick={toggleMenu}
-          className='hidden tabletP:block tabletL:hidden'
-        ></Image>
+          )}
+          <Image
+            src={menuSmall}
+            alt='menu'
+            width={34}
+            onClick={toggleMenu}
+            className='tabletP:hidden tabletL:hidden'
+          ></Image>
+          <Image
+            src={menuLarge}
+            alt='menu'
+            width={42}
+            onClick={toggleMenu}
+            className='hidden tabletP:block tabletL:hidden'
+          ></Image>
+        </div>
       </div>
     </header>
   );

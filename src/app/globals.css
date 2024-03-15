@@ -175,7 +175,7 @@
       @apply tabletP:px-10 tabletP:py-10;
     }
     .drop-menu-inner-layout {
-      @apply flex flex-col h-screen justify-center items-center gap-10;
+      @apply flex flex-col h-4/5 justify-center items-center gap-10;
     }
     .navlink-container {
       @apply flex flex-col justify-center items-center gap-10 flex-grow;
@@ -183,6 +183,9 @@
     .logout-container {
       @apply flex flex-col w-full gap-5;
       @apply phoneP:gap-10;
+    }
+    .menu-nav-container {
+      @apply flex items-center gap-10;
     }
     .menu-nav {
       @apply nav-7;
@@ -206,7 +209,7 @@
       @apply desktopL:px-96 desktopL:py-16;
     }
     .drop-menu-inner-layout {
-      @apply flex flex-col h-screen justify-center items-center gap-6;
+      @apply flex flex-col h-3/4 justify-center items-center gap-6;
     }
     .navlink-container {
       @apply flex flex-col justify-center items-center gap-2.5 flex-grow;
@@ -215,6 +218,9 @@
     .logout-container {
       @apply flex flex-col w-full gap-2.5;
       @apply phoneL:gap-10;
+    }
+    .menu-nav-container {
+      @apply flex items-center gap-5;
     }
     .menu-nav {
       @apply nav-7;
