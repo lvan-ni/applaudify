@@ -221,6 +221,7 @@
     }
     .menu-nav-container {
       @apply flex items-center gap-5;
+      @apply tabletL:w-full tabletL:justify-around;
     }
     .menu-nav {
       @apply nav-7;

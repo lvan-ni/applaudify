@@ -110,13 +110,13 @@ const Header = () => {
             src={logo}
             alt='logo'
             height={22}
-            className='tabletL:hidden'
+            className='laptopL:hidden'
           ></Image>
           <Image
             src={logo}
             alt='logo'
             height={30}
-            className='hidden tabletL:block'
+            className='hidden laptopL:block'
           ></Image>
         </Link>
         <div className='tabletL:hidden'>
